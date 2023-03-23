@@ -1,4 +1,4 @@
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
 
 import { Rating } from '../stars/rating';
 
@@ -8,7 +8,7 @@ type CardGridProps = {
   image: string | null;
   rating: number | null;
   title: string;
-  authors: string;
+  authors: string[];
   issueYear: string;
   higlight: string;
 };
