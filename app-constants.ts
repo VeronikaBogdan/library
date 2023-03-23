@@ -1,0 +1,11 @@
+export const HOST = 'https://strapi.cleverland.by';
+export const ALL_BOOKS = 'all';
+export const ASCENDING = 'ascending';
+export const DESCENDING = 'descending';
+export const LIST = 'list';
+export const GRID = 'grid';
+export const BOOKPAGE = 'bookpage';
+export const MAIN = 'main';
+export const TERMS_OF_USE = 'terms-of-use';
+export const OFFER_AGREEMENT = 'offer-agreement';
+export const BURGER = 'burger';

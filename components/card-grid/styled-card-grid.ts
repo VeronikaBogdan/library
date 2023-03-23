@@ -5,10 +5,11 @@ import * as styles from '../../styles/constant';
 export const StyledCard = styled.TouchableOpacity`
   background: ${styles.WHITE};
   shadow-color: ${styles.BLACK40};
-  elevation: 10;
+  elevation: 13;
   border-radius: 10px;
   margin-top: 16px;
   padding: 8px 16px 16px 16px;
+  margin: 8px 16px;
 `;
 
 export const Title = styled.Text`

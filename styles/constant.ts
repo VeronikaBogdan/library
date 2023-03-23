@@ -16,24 +16,3 @@ export const BLACK20 = '#BFC4C9';
 export const BLACK10 = '#EBEBEB';
 export const BLACK5 = '#F9F9FA';
 export const ORANGE = 'rgb(248, 54, 0)';
-
-export const COLORHOVER = `
-  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-export const COLORPRESSED = `
-  background: linear-gradient(233.73deg, #F83600 -16.08%, #F9D423 327.37%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-export const COLORACCENT = `
-  background: ${ACCENT};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
