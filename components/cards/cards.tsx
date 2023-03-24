@@ -19,7 +19,7 @@ type CardTypes = {
 
 const renderCardGrid: ListRenderItem<CardTypes> = ({ item }) => (
   <CardGrid
-    image='image'
+    image={item.image}
     rating={item.rating}
     title={item.title}
     authors={item.authors}
@@ -30,7 +30,7 @@ const renderCardGrid: ListRenderItem<CardTypes> = ({ item }) => (
 
 const renderCardList: ListRenderItem<CardTypes> = ({ item }) => (
   <CardList
-    image='image'
+    image={item.image}
     rating={item.rating}
     title={item.title}
     authors={item.authors}
@@ -40,5 +40,5 @@ const renderCardList: ListRenderItem<CardTypes> = ({ item }) => (
 );
 
 export const Cards = () => (
-  <FlatList data={books} keyExtractor={(card: CardTypes) => `${card.id}`} renderItem={renderCardList} />
+  <FlatList data={books} keyExtractor={(card: CardTypes) => `${card.id}`} renderItem={renderCardGrid} />
 );

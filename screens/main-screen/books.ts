@@ -2,7 +2,7 @@ export const books = [
   {
     id: 1,
     image: {
-      url: '/uploads/image_book_5e25f0be0d.jpg',
+      url: 'https://raw.githubusercontent.com/VeronikaBogdan/library/develop/assets/png/image.png?token=GHSAT0AAAAAACANEUY76SSDCE6AXMSUSD3GZA45XMA',
     },
     rating: 3,
     title: 'Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих',
@@ -59,7 +59,7 @@ export const books = [
   {
     id: 6,
     image: {
-      url: '/uploads/image_book_5e25f0be0d.jpg',
+      url: 'https://raw.githubusercontent.com/VeronikaBogdan/library/develop/assets/png/image.png?token=GHSAT0AAAAAACANEUY76SSDCE6AXMSUSD3GZA45XMA',
     },
     rating: 3,
     title: 'Грокаем алгоритмы. Иллюстрированное пособие для программистов и любопытствующих',

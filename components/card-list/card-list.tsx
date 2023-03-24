@@ -1,11 +1,13 @@
 import { Image, Text } from 'react-native';
 
+import { LIST } from '../../app-constants';
+import { BookImage } from '../book-image/book-image';
 import { Rating } from '../stars/rating';
 
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
 
 type CardListProps = {
-  image: string | null;
+  image: object | null;
   rating: number | null;
   title: string;
   authors: string[];
@@ -15,7 +17,7 @@ type CardListProps = {
 
 export const CardList = ({ image, rating, title, authors, issueYear, higlight }: CardListProps) => (
   <StyledCardList activeOpacity={0.5}>
-    <Image source={require('../../assets/png/image.png')} />
+    <BookImage image={image} choice={LIST} bookpage='' />
     <Wrapper>
       <TitleList numberOfLines={3}>{title}</TitleList>
       <AuthorList numberOfLines={3}>
