@@ -3,6 +3,7 @@ import { Image, Text } from 'react-native';
 import { GRID } from '../../app-constants';
 
 import { BookImage } from '../book-image/book-image';
+import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
 
 import { Author, Title, StyledCard } from './styled-card-grid';
@@ -14,9 +15,11 @@ type CardGridProps = {
   authors: string[];
   issueYear: string;
   higlight: string;
+  button: string;
+  list: string;
 };
 
-export const CardGrid = ({ image, rating, title, authors, issueYear, higlight }: CardGridProps) => (
+export const CardGrid = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardGridProps) => (
   <StyledCard activeOpacity={0.5}>
     <BookImage image={image} choice={GRID} bookpage='' />
     <Rating amount={rating} />
@@ -27,5 +30,6 @@ export const CardGrid = ({ image, rating, title, authors, issueYear, higlight }:
       ))}
       {issueYear}
     </Author>
+    <CardButton text={button} choice={GRID} list='' bookpage='' />
   </StyledCard>
 );

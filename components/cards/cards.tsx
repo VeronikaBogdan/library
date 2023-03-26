@@ -24,6 +24,8 @@ const renderCardGrid: ListRenderItem<CardTypes> = ({ item }) => (
     title={item.title}
     authors={item.authors}
     issueYear={item.issueYear}
+    button={item.button}
+    list={item.list}
     higlight='clean code'
   />
 );
