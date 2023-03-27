@@ -6,7 +6,7 @@ export const Image = styled.Image`
   width: 194px;
   height: 262px;
   border-radius: 10px;
-  border: 1px ${styles.BLACK40};
+  /* border: 1px ${styles.BLACK40}; */
   margin-bottom: 16px;
   align-self: center;
 `;
@@ -45,10 +45,10 @@ export const NoImageList = styled(NoImage)`
   margin-bottom: 0;
   align-self: flex-start;
 
-  & svg {
+  /* & svg {
     width: 24px;
     height: 24px;
-  }
+  } */
 `;
 
 export const NoImageLarge = styled(NoImage)`
@@ -58,8 +58,8 @@ export const NoImageLarge = styled(NoImage)`
   align-self: center;
   border-radius: 10px;
 
-  & svg {
+  /* & svg {
     width: 48px;
     height: 48px;
-  }
+  } */
 `;

@@ -6,13 +6,13 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background: ${styles.ORANGE};
-  padding: 11px;
+  padding: 9px;
 `;
 
 export const BookButton = styled(Button)`
   width: 100%;
   border-radius: 25px;
-  margin: 35px 0 20px;
+  margin: 35px 0 10px;
 `;
 
 export const BookedButton = styled(BookButton)`
@@ -28,9 +28,9 @@ export const IsTakendButton = styled(BookButton)`
 export const StyledTextBook = styled.Text`
   color: ${styles.WHITE};
   font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: 1.2px;
+  font-size: 17px;
+  line-height: 23px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 `;
 

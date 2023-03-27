@@ -3,6 +3,8 @@ import { FlatList, ListRenderItem } from 'react-native';
 import { CardGrid } from '../card-grid/card-grid';
 import { CardList } from '../card-list/card-list';
 
+import { GRID } from '../../app-constants';
+
 import { books } from '../../screens/main-screen/books';
 
 type CardTypes = {
@@ -43,6 +45,14 @@ const renderCardList: ListRenderItem<CardTypes> = ({ item }) => (
   />
 );
 
-export const Cards = () => (
-  <FlatList data={books} keyExtractor={(card: CardTypes) => `${card.id}`} renderItem={renderCardList} />
+type CardsProps = {
+  viewChoice: string;
+};
+
+export const Cards = ({ viewChoice }: CardsProps) => (
+  <FlatList
+    data={books}
+    keyExtractor={(card: CardTypes) => `${card.id}`}
+    renderItem={viewChoice === GRID ? renderCardGrid : renderCardList}
+  />
 );
