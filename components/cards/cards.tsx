@@ -37,10 +37,12 @@ const renderCardList: ListRenderItem<CardTypes> = ({ item }) => (
     title={item.title}
     authors={item.authors}
     issueYear={item.issueYear}
+    button={item.button}
+    list={item.list}
     higlight='clean code'
   />
 );
 
 export const Cards = () => (
-  <FlatList data={books} keyExtractor={(card: CardTypes) => `${card.id}`} renderItem={renderCardGrid} />
+  <FlatList data={books} keyExtractor={(card: CardTypes) => `${card.id}`} renderItem={renderCardList} />
 );

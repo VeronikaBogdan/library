@@ -2,6 +2,7 @@ import { Image, Text } from 'react-native';
 
 import { LIST } from '../../app-constants';
 import { BookImage } from '../book-image/book-image';
+import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
 
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
@@ -13,9 +14,11 @@ type CardListProps = {
   authors: string[];
   issueYear: string;
   higlight: string;
+  button: string;
+  list: string;
 };
 
-export const CardList = ({ image, rating, title, authors, issueYear, higlight }: CardListProps) => (
+export const CardList = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardListProps) => (
   <StyledCardList activeOpacity={0.5}>
     <BookImage image={image} choice={LIST} bookpage='' />
     <Wrapper>
@@ -27,6 +30,7 @@ export const CardList = ({ image, rating, title, authors, issueYear, higlight }:
         {issueYear}
       </AuthorList>
       <Rating amount={rating} />
+      <CardButton text={button} choice={LIST} list='list' bookpage='' />
     </Wrapper>
   </StyledCardList>
 );

@@ -1,15 +1,14 @@
-import { Text } from 'react-native';
-
+import { View } from 'react-native/Libraries/Components/View/View';
 import {
-  BookedGridButton,
-  BookedListButton,
+  BookedButton,
   BookedPageButton,
   BookPageButton,
-  GridBookButton,
-  IsTakendGridButton,
-  IsTakendListButton,
+  BookButton,
+  IsTakendButton,
   IsTakendPagetButton,
-  ListBookButton,
+  StyledTextBook,
+  StyledTextBooked,
+  StyledTextIsTaken,
 } from './styled-card-button';
 
 type CardButtonProps = {
@@ -23,34 +22,53 @@ export const CardButton = ({ text, list, choice, bookpage }: CardButtonProps) =>
   if (choice === 'grid') {
     if (text === 'Забронировать')
       return (
-        <GridBookButton>
-          <Text>{text}</Text>
-        </GridBookButton>
+        <BookButton>
+          <StyledTextBook>{text}</StyledTextBook>
+        </BookButton>
       );
     if (text === 'Забронирована')
       return (
-        <BookedGridButton>
-          <Text>{text}</Text>
-        </BookedGridButton>
+        <BookedButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedButton>
       );
     if (list === 'list')
       return (
-        <IsTakendGridButton>
-          <Text>{text}</Text>
-        </IsTakendGridButton>
+        <IsTakendButton>
+          <StyledTextIsTaken>{text}</StyledTextIsTaken>
+        </IsTakendButton>
       );
   }
-  // if (choice === 'list') {
-  //   if (text === 'Забронировать') return <ListBookButton>{text}</ListBookButton>;
-  //   if (text === 'Забронирована') return <BookedListButton>{text}</BookedListButton>;
-  //   if (list === 'list') return <IsTakendListButton>{text}</IsTakendListButton>;
-  // }
+  if (choice === 'list') {
+    if (text === 'Забронировать')
+      return (
+        <BookButton>
+          <StyledTextBook>{text}</StyledTextBook>
+        </BookButton>
+      );
+    if (text === 'Забронирована')
+      return (
+        <BookedButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedButton>
+      );
+    if (list === 'list')
+      return (
+        <IsTakendButton activeOpacity={1}>
+          <StyledTextIsTaken>{text}</StyledTextIsTaken>
+        </IsTakendButton>
+      );
+  }
   // if (bookpage === 'bookpage') {
-  //   if (text === 'Забронировать') return <BookPageButton>{text}</BookPageButton>;
-  //   if (text === 'Оценить книгу') return <BookPageButton className='review'>{text}</BookPageButton>;
-  //   if (text === 'Забронирована') return <BookedPageButton>{text}</BookedPageButton>;
-  //   if (list === 'list') return <IsTakendPagetButton>{text}</IsTakendPagetButton>;
+  //   if (text === 'Забронировать') return <BookPageButton><Text>{text}</Text></BookPageButton>;
+  //   if (text === 'Оценить книгу') return <BookPageButton className='review'><Text>{text}</Text></BookPageButton>;
+  //   if (text === 'Забронирована') return <BookedPageButton><Text>{text}</Text></BookedPageButton>;
+  //   if (list === 'list') return <IsTakendPagetButton><Text>{text}</Text></IsTakendPagetButton>;
   // }
 
-  return <IsTakendGridButton>{text}</IsTakendGridButton>;
+  return (
+    <IsTakendButton>
+      <StyledTextIsTaken>{text}</StyledTextIsTaken>
+    </IsTakendButton>
+  );
 };
