@@ -44,11 +44,6 @@ export const NoImageList = styled(NoImage)`
   border-radius: 5px;
   margin-bottom: 0;
   align-self: flex-start;
-
-  /* & svg {
-    width: 24px;
-    height: 24px;
-  } */
 `;
 
 export const NoImageLarge = styled(NoImage)`

@@ -1,11 +1,10 @@
-import { View } from 'react-native/Libraries/Components/View/View';
 import {
   BookedButton,
-  BookedPageButton,
-  BookPageButton,
+  BookedScreenButton,
+  BookScreenButton,
   BookButton,
   IsTakendButton,
-  IsTakendPagetButton,
+  IsTakendScreenButton,
   StyledTextBook,
   StyledTextBooked,
   StyledTextIsTaken,
@@ -59,12 +58,32 @@ export const CardButton = ({ text, list, choice, bookpage }: CardButtonProps) =>
         </IsTakendButton>
       );
   }
-  // if (bookpage === 'bookpage') {
-  //   if (text === 'Забронировать') return <BookPageButton><Text>{text}</Text></BookPageButton>;
-  //   if (text === 'Оценить книгу') return <BookPageButton className='review'><Text>{text}</Text></BookPageButton>;
-  //   if (text === 'Забронирована') return <BookedPageButton><Text>{text}</Text></BookedPageButton>;
-  //   if (list === 'list') return <IsTakendPagetButton><Text>{text}</Text></IsTakendPagetButton>;
-  // }
+  if (bookpage === 'bookpage') {
+    if (text === 'Забронировать')
+      return (
+        <BookScreenButton>
+          <StyledTextBook>{text}</StyledTextBook>
+        </BookScreenButton>
+      );
+    // if (text === 'Оценить книгу')
+    //   return (
+    //     <BookPageButton className='review'>
+    //       <Text>{text}</Text>
+    //     </BookPageButton>
+    //   );
+    if (text === 'Забронирована')
+      return (
+        <BookedScreenButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedScreenButton>
+      );
+    if (list === 'list')
+      return (
+        <IsTakendScreenButton activeOpacity={1}>
+          <StyledTextIsTaken>{text}</StyledTextIsTaken>
+        </IsTakendScreenButton>
+      );
+  }
 
   return (
     <IsTakendButton>

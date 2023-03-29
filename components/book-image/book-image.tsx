@@ -30,13 +30,20 @@ export const BookImage = ({ image, choice, bookpage }: BookImageProps) => {
         }}
       />
     );
-  // if (!bookpage && choice === BOOKPAGE)
-  //   return (
-  //     <NoImageLarge>
-  //       <IconCat />
-  //     </NoImageLarge>
-  //   );
-  // if (bookpage && choice === BOOKPAGE) return <ImageLarge src={`${HOST}${bookpage}`} />;
+  if (!bookpage && choice === BOOKPAGE)
+    return (
+      <NoImageLarge>
+        <IconCat />
+      </NoImageLarge>
+    );
+  if (bookpage && choice === BOOKPAGE)
+    return (
+      <ImageLarge
+        source={{
+          uri: image ? image.url : null,
+        }}
+      />
+    );
   return (
     <Image
       source={{

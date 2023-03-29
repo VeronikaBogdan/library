@@ -42,17 +42,14 @@ export const StyledTextIsTaken = styled(StyledTextBook)`
   color: ${styles.BLACK40};
 `;
 
-export const BookPageButton = styled(BookButton)`
-  max-width: 640px;
-  align-self: flex-start;
+export const BookScreenButton = styled(BookButton)`
+  margin-top: 0px;
 `;
 
-export const BookedPageButton = styled(BookedButton)`
-  max-width: 350px;
-  align-self: flex-start;
+export const BookedScreenButton = styled(BookedButton)`
+  margin-top: 0px;
 `;
 
-export const IsTakendPagetButton = styled(IsTakendButton)`
-  max-width: 350px;
-  align-self: flex-start;
+export const IsTakendScreenButton = styled(IsTakendButton)`
+  margin-top: 0px;
 `;
