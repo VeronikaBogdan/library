@@ -1,5 +1,6 @@
-import { DARK, BLACK70 } from './../../styles/constant';
 import styled from 'styled-components/native';
+
+import { DARK, BLACK70 } from './../../styles/constant';
 
 export const Description = styled.View`
   margin: 6px 0 0;

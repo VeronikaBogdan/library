@@ -22,7 +22,7 @@ type CardGridProps = {
 export const CardGrid = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardGridProps) => (
   <StyledCard activeOpacity={0.5}>
     <BookImage image={image} choice={GRID} bookpage='' />
-    <Rating amount={rating} />
+    <Rating amount={rating} choice='' />
     <Title numberOfLines={3}>{title}</Title>
     <Author numberOfLines={3}>
       {authors.map((author, index) => (

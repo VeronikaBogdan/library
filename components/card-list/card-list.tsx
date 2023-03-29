@@ -29,7 +29,7 @@ export const CardList = ({ image, rating, title, authors, issueYear, higlight, b
         ))}
         {issueYear}
       </AuthorList>
-      <Rating amount={rating} />
+      <Rating amount={rating} choice='' />
       <CardButton text={button} choice={LIST} list='list' bookpage='' />
     </Wrapper>
   </StyledCardList>

@@ -1,7 +1,6 @@
-import { BLACK5 } from './../../styles/constant';
 import styled from 'styled-components/native';
 
-import * as styles from '../../styles/constant';
+import { BLACK5, BLACK40, DARK } from './../../styles/constant';
 
 export const ViewWrapper = styled.View`
   padding: 16px 16px 8px;
@@ -13,8 +12,16 @@ export const BreadCrumbsWrapper = styled.View`
 `;
 
 export const BreadCrumbsText = styled.Text`
-  color: ${styles.BLACK40};
+  color: ${BLACK40};
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
+`;
+
+export const SectionTitle = styled.Text`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: 0.3px;
+  color: ${DARK};
 `;
