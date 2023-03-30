@@ -46,6 +46,10 @@ export const BookScreenButton = styled(BookButton)`
   margin-top: 0px;
 `;
 
+export const AssessScreenButton = styled(BookButton)`
+  margin-top: 15px;
+`;
+
 export const BookedScreenButton = styled(BookedButton)`
   margin-top: 0px;
 `;

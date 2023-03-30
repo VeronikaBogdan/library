@@ -1,4 +1,5 @@
 import {
+  AssessScreenButton,
   BookedButton,
   BookedScreenButton,
   BookScreenButton,
@@ -65,12 +66,12 @@ export const CardButton = ({ text, list, choice, bookpage }: CardButtonProps) =>
           <StyledTextBook>{text}</StyledTextBook>
         </BookScreenButton>
       );
-    // if (text === 'Оценить книгу')
-    //   return (
-    //     <BookPageButton className='review'>
-    //       <Text>{text}</Text>
-    //     </BookPageButton>
-    //   );
+    if (text === 'Оценить книгу')
+      return (
+        <AssessScreenButton>
+          <StyledTextBook>{text}</StyledTextBook>
+        </AssessScreenButton>
+      );
     if (text === 'Забронирована')
       return (
         <BookedScreenButton>

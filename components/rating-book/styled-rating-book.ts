@@ -1,7 +1,8 @@
-import { BLACK5 } from './../../styles/constant';
 import styled from 'styled-components/native';
 
 import { SectionTitle } from '../../screens/book-screen/styled-book-screen';
+
+import { BLACK5 } from './../../styles/constant';
 
 export const RatingTitle = styled(SectionTitle)`
   margin: 5px 0 10px;
