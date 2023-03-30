@@ -6,11 +6,12 @@ import { BLACK40, BLACK70, DARK } from '../../styles/constant';
 export const CommentsTitleWrapper = styled.Pressable`
   flex-direction: row;
   margin: 25px 0 0;
+  padding-vertical: 5px;
   align-items: center;
 `;
 
 export const CommentsAmount = styled.Text`
-  margin-left: 10px;
+  margin-horizontal: 10px;
   padding-top: 3px;
   font-weight: 400;
   font-size: 20px;
