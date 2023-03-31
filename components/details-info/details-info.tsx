@@ -20,8 +20,8 @@ export const DetailsInfo = () => {
   return (
     <View>
       <DetailsTitle>Подробная информация</DetailsTitle>
-      {details.map((detail) => (
-        <Detail>
+      {details.map((detail, index) => (
+        <Detail key={index}>
           <DetailName>{detail.name}</DetailName>
           <DetailText>{detail.text}</DetailText>
         </Detail>

@@ -25,6 +25,13 @@ export default function App() {
           }}
         >
           <Stack.Screen
+            name='MainScreen'
+            component={MainScreen}
+            options={{
+              title: 'Библиотека',
+            }}
+          />
+          <Stack.Screen
             name='BookScreen'
             component={BookScreen}
             options={{
@@ -34,13 +41,6 @@ export default function App() {
           <Stack.Screen
             name='TermsScreen'
             component={TermsScreen}
-            options={{
-              title: 'Библиотека',
-            }}
-          />
-          <Stack.Screen
-            name='MainScreen'
-            component={MainScreen}
             options={{
               title: 'Библиотека',
             }}

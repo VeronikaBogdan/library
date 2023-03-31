@@ -1,4 +1,5 @@
-import { Image, Text } from 'react-native';
+import { Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { GRID } from '../../app-constants';
 
@@ -19,17 +20,21 @@ type CardGridProps = {
   list: string;
 };
 
-export const CardGrid = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardGridProps) => (
-  <StyledCard activeOpacity={0.5}>
-    <BookImage image={image} choice={GRID} bookpage='' />
-    <Rating amount={rating} choice='' />
-    <Title numberOfLines={3}>{title}</Title>
-    <Author numberOfLines={3}>
-      {authors.map((author, index) => (
-        <Text key={index}>{author}, </Text>
-      ))}
-      {issueYear}
-    </Author>
-    <CardButton text={button} choice={GRID} list='' bookpage='' />
-  </StyledCard>
-);
+export const CardGrid = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardGridProps) => {
+  const navigation = useNavigation();
+
+  return (
+    <StyledCard activeOpacity={0.5} onPress={() => navigation.navigate('BookScreen')}>
+      <BookImage image={image} choice={GRID} bookpage='' />
+      <Rating amount={rating} choice='' />
+      <Title numberOfLines={3}>{title}</Title>
+      <Author numberOfLines={3}>
+        {authors.map((author, index) => (
+          <Text key={index}>{author}, </Text>
+        ))}
+        {issueYear}
+      </Author>
+      <CardButton text={button} choice={GRID} list='' bookpage='' />
+    </StyledCard>
+  );
+};
