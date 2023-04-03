@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { BookScreen } from './screens/book-screen/book-screen';
 import { MainScreen } from './screens/main-screen/main-screen';
@@ -9,50 +9,65 @@ import { TermsScreen } from './screens/terms-offer-screen/terms-screen';
 
 import * as styles from './styles/constant';
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const categories = [
+  { name: 'MainScreen', drawerLabel: 'все книги' },
+  { name: 'Business', drawerLabel: 'бизнес' },
+  { name: 'Children', drawerLabel: 'дети' },
+];
 
 export default function App() {
   return (
     <>
       <StatusBar style='dark' />
       <NavigationContainer>
-        <Stack.Navigator
+        <Drawer.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: styles.WHITE },
+            headerStyle: { backgroundColor: styles.BLACK5 },
             headerTintColor: styles.DARK,
             headerTitleStyle: { fontSize: 24 },
-            contentStyle: { backgroundColor: styles.WHITE },
+            // contentStyle: { backgroundColor: styles.WHITE },
           }}
         >
-          <Stack.Screen
-            name='MainScreen'
-            component={MainScreen}
-            options={{
-              title: 'Библиотека',
-            }}
-          />
-          <Stack.Screen
+          {categories.map((category, index) => (
+            <Drawer.Screen
+              key={index}
+              name={category.name}
+              component={MainScreen}
+              options={{
+                drawerLabel: category.drawerLabel,
+                title: 'Библиотека',
+                drawerActiveTintColor: styles.ORANGE,
+              }}
+            />
+          ))}
+          <Drawer.Screen
             name='BookScreen'
             component={BookScreen}
             options={{
+              drawerLabel: 'Страница книги',
               title: 'Библиотека',
+              drawerItemStyle: { height: 0 },
             }}
           />
-          <Stack.Screen
+          <Drawer.Screen
             name='TermsScreen'
             component={TermsScreen}
             options={{
+              drawerLabel: 'Договор',
               title: 'Библиотека',
             }}
           />
-          <Stack.Screen
+          <Drawer.Screen
             name='OfferScreen'
             component={OfferScreen}
             options={{
+              drawerLabel: 'Оффер',
               title: 'Библиотека',
             }}
           />
-        </Stack.Navigator>
+        </Drawer.Navigator>
       </NavigationContainer>
     </>
   );

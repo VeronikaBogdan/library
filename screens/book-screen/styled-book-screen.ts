@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
 
-import { BLACK5, BLACK40, DARK } from './../../styles/constant';
+import { BLACK5, BLACK40, DARK, WHITE } from './../../styles/constant';
 
 export const ViewWrapper = styled.View`
   padding: 16px 16px 8px;
+  background-color: ${WHITE};
 `;
 
 export const BreadCrumbsWrapper = styled.View`
