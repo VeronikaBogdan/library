@@ -19,26 +19,18 @@ export interface CategoriesState {
 //   callback: any;
 // }
 
-export interface CategoriesSuccessPayload {
-  categories: Category[];
-}
-
-export interface CategoriesFailurePayload {
-  error: string;
-}
-
 export interface CategoriesRequest {
   type: typeof CATEGORIES_REQUEST;
 }
 
 export interface CategoriesSuccess {
   type: typeof CATEGORIES_SUCCESS;
-  payload: CategoriesSuccessPayload;
+  categories: Category[];
 }
 
 export interface CategoriesFailure {
   type: typeof CATEGORIES_FAILURE;
-  payload: CategoriesFailurePayload;
+  error: string;
 }
 
 export type CategoriesActions = CategoriesRequest | CategoriesSuccess | CategoriesFailure;

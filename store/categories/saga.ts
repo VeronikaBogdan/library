@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import { categoriesSuccess, categoriesFailure } from './actions';
-
-import { CATEGORIES_REQUEST } from './actions';
-
 import { HOST } from '../../app-constants';
+
+import { CATEGORIES_REQUEST, categoriesSuccess, categoriesFailure } from './actions';
+import { Category } from './types';
 
 export const instance = axios.create({
   baseURL: HOST,
@@ -28,10 +27,11 @@ export const categories = () => instance.get('/api/categories');
 
 export function* categoriesSaga() {
   try {
-    const response: { data: any } = yield call(categories);
-    yield put(categoriesSuccess({ categories: response.data }));
+    const response: { data: Category[] } = yield call(categories);
+    const { data } = response;
+    yield put(categoriesSuccess(data));
   } catch (error: any) {
-    yield put(categoriesFailure({ error: error.message }));
+    yield put(categoriesFailure(error.message));
   }
 }
 

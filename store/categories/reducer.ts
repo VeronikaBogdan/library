@@ -14,9 +14,11 @@ export default (state = initialState, action: CategoriesActions) => {
     case CATEGORIES_REQUEST:
       return { ...state, pending: true };
     case CATEGORIES_SUCCESS:
-      return { ...state, categories: action.payload.categories, pending: false, error: null };
+      const { categories } = action;
+      return { ...state, categories: categories, pending: false, error: null };
     case CATEGORIES_FAILURE:
-      return { ...state, pending: false, error: action.payload.error };
+      const { error } = action;
+      return { ...state, pending: false, error: error };
     default:
       return { ...state };
   }

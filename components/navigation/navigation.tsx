@@ -19,7 +19,7 @@ const Drawer = createDrawerNavigator();
 export const Navigation = () => {
   const dispatch = useDispatch();
 
-  const { categories, pending } = useSelector((state: CategoriesState) => state.categories);
+  const { categories, pending, error } = useSelector((state: CategoriesState) => state.categories);
 
   useEffect(() => {
     dispatch(categoriesRequest());
@@ -45,18 +45,20 @@ export const Navigation = () => {
               drawerActiveTintColor: styles.ORANGE,
             }}
           />
-          {categories.map((category, index) => (
-            <Drawer.Screen
-              key={index}
-              name={category.path}
-              component={MainScreen}
-              options={{
-                drawerLabel: category.name,
-                title: 'Библиотека',
-                drawerActiveTintColor: styles.ORANGE,
-              }}
-            />
-          ))}
+          {!pending &&
+            !error &&
+            categories.map((category, index) => (
+              <Drawer.Screen
+                key={index}
+                name={category.path}
+                component={MainScreen}
+                options={{
+                  drawerLabel: category.name,
+                  title: 'Библиотека',
+                  drawerActiveTintColor: styles.ORANGE,
+                }}
+              />
+            ))}
           <Drawer.Screen
             name='BookScreen'
             component={BookScreen}
