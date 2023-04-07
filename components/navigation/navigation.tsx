@@ -10,7 +10,8 @@ import { OfferScreen } from '../../screens/terms-offer-screen/offer-screen';
 import { TermsScreen } from '../../screens/terms-offer-screen/terms-screen';
 
 import { categoriesRequest } from '../../store/categories/actions';
-import { CategoriesState } from '../../store/rootReducer';
+import { booksRequest } from '../../store/books/actions';
+import { AppState } from '../../store/rootReducer';
 
 import * as styles from '../../styles/constant';
 
@@ -19,10 +20,14 @@ const Drawer = createDrawerNavigator();
 export const Navigation = () => {
   const dispatch = useDispatch();
 
-  const { categories, pending, error } = useSelector((state: CategoriesState) => state.categories);
+  const { categories, pending, error } = useSelector((state: AppState) => state.categories);
+  const { books, pending: booksPending, error: booksError } = useSelector((state: AppState) => state.books);
+
+  const showAmountOfBooks = (category: string) => books.filter((book) => book.categories.includes(category)).length;
 
   useEffect(() => {
     dispatch(categoriesRequest());
+    dispatch(booksRequest());
   }, [dispatch]);
 
   return (
@@ -53,7 +58,7 @@ export const Navigation = () => {
                 name={category.path}
                 component={MainScreen}
                 options={{
-                  drawerLabel: category.name,
+                  drawerLabel: `${category.name} ${showAmountOfBooks(category.name)}`,
                   title: 'Библиотека',
                   drawerActiveTintColor: styles.ORANGE,
                 }}

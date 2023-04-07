@@ -1,7 +1,8 @@
 import { all, fork } from 'redux-saga/effects';
 
 import { watcherSagaForCategories } from './categories/saga';
+import { watcherSagaForBooks } from './books/saga';
 
 export function* rootSaga() {
-  yield all([fork(watcherSagaForCategories)]);
+  yield all([fork(watcherSagaForCategories), fork(watcherSagaForBooks)]);
 }
