@@ -1,8 +1,4 @@
-import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from './actionTypes';
-
-export interface ICategories {
-  token: string;
-}
+import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from './actions';
 
 export interface Category {
   name: string;
@@ -24,7 +20,6 @@ export interface CategoriesState {
 // }
 
 export interface CategoriesSuccessPayload {
-  token: string;
   categories: Category[];
 }
 
@@ -34,7 +29,6 @@ export interface CategoriesFailurePayload {
 
 export interface CategoriesRequest {
   type: typeof CATEGORIES_REQUEST;
-  //   payload: CategoriesPayload;
 }
 
 export interface CategoriesSuccess {

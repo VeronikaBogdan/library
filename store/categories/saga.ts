@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { categoriesSuccess, categoriesFailure } from './actions';
 
-import { CATEGORIES_REQUEST } from './actionTypes';
+import { CATEGORIES_REQUEST } from './actions';
 
 import { HOST } from '../../app-constants';
 
@@ -26,12 +26,10 @@ instance.interceptors.request.use(
 
 export const categories = () => instance.get('/api/categories');
 
-export function* categoriesSaga(action: any) {
+export function* categoriesSaga() {
   try {
     const response: { data: any } = yield call(categories);
-    console.log(response.data);
-    yield put(categoriesSuccess({ token: '3', categories: response.data }));
-    // action.payload.callback(response.data);
+    yield put(categoriesSuccess({ categories: response.data }));
   } catch (error: any) {
     yield put(categoriesFailure({ error: error.message }));
   }

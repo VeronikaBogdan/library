@@ -1,4 +1,4 @@
-import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from './actionTypes';
+import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from './actions';
 
 import { CategoriesActions, CategoriesState } from './types';
 
@@ -9,23 +9,15 @@ const initialState: CategoriesState = {
   error: null,
 };
 
-const reducers = (state = initialState, action: CategoriesActions) => {
+export default (state = initialState, action: CategoriesActions) => {
   switch (action.type) {
     case CATEGORIES_REQUEST:
       return { ...state, pending: true };
     case CATEGORIES_SUCCESS:
-      return {
-        ...state,
-        categories: action.payload.categories,
-        pending: false,
-        token: action.payload.token,
-        error: null,
-      };
+      return { ...state, categories: action.payload.categories, pending: false, error: null };
     case CATEGORIES_FAILURE:
-      return { ...state, pending: false, token: '', error: action.payload.error };
+      return { ...state, pending: false, error: action.payload.error };
     default:
       return { ...state };
   }
 };
-
-export default reducers;
