@@ -9,11 +9,11 @@ import { Rating } from '../stars/rating';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
 
 type CardListProps = {
-  image: object | null;
+  image: string | null;
   rating: number | null;
   title: string;
-  authors: string[];
-  issueYear: string;
+  authors: string[] | null;
+  issueYear: string | null;
   higlight: string;
   button: string;
   list: string;

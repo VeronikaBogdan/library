@@ -9,6 +9,7 @@ export const Image = styled.Image`
   /* border: 1px ${styles.BLACK40}; */
   margin-bottom: 16px;
   align-self: center;
+  object-fit: fill;
 `;
 
 export const ImageList = styled(Image)`

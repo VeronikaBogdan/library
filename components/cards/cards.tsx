@@ -1,46 +1,38 @@
+import { useEffect } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { GRID } from '../../app-constants';
+
+import { booksRequest } from '../../store/books/actions';
+import { Book } from '../../store/books/types';
+import { AppState } from '../../store/rootReducer';
 
 import { CardGrid } from '../card-grid/card-grid';
 import { CardList } from '../card-list/card-list';
 
-import { GRID } from '../../app-constants';
-
-import { books } from '../../screens/main-screen/books';
-
-type CardTypes = {
-  id: number;
-  image: object | null;
-  rating: number | null;
-  title: string;
-  authors: string[];
-  issueYear: string;
-  categories: string[];
-  button: string;
-  list: string;
-};
-
-const renderCardGrid: ListRenderItem<CardTypes> = ({ item }) => (
+const renderCardGrid: ListRenderItem<Book> = ({ item }) => (
   <CardGrid
-    image={item.image}
+    image={item.image.url}
     rating={item.rating}
     title={item.title}
     authors={item.authors}
     issueYear={item.issueYear}
-    button={item.button}
-    list={item.list}
+    button='Забронировать'
+    list=''
     higlight='clean code'
   />
 );
 
-const renderCardList: ListRenderItem<CardTypes> = ({ item }) => (
+const renderCardList: ListRenderItem<Book> = ({ item }) => (
   <CardList
-    image={item.image}
+    image={item.image.url}
     rating={item.rating}
     title={item.title}
     authors={item.authors}
     issueYear={item.issueYear}
-    button={item.button}
-    list={item.list}
+    button='Забронировать'
+    list=''
     higlight='clean code'
   />
 );
@@ -49,10 +41,20 @@ type CardsProps = {
   viewChoice: string;
 };
 
-export const Cards = ({ viewChoice }: CardsProps) => (
-  <FlatList
-    data={books}
-    keyExtractor={(card: CardTypes) => `${card.id}`}
-    renderItem={viewChoice === GRID ? renderCardGrid : renderCardList}
-  />
-);
+export const Cards = ({ viewChoice }: CardsProps) => {
+  const dispatch = useDispatch();
+
+  const { books } = useSelector((state: AppState) => state.books);
+
+  useEffect(() => {
+    dispatch(booksRequest());
+  }, [dispatch]);
+
+  return (
+    <FlatList
+      data={books}
+      keyExtractor={(card: Book) => `${card.id}`}
+      renderItem={viewChoice === GRID ? renderCardGrid : renderCardList}
+    />
+  );
+};

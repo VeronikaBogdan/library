@@ -10,11 +10,11 @@ import { Rating } from '../stars/rating';
 import { Author, Title, StyledCard } from './styled-card-grid';
 
 type CardGridProps = {
-  image: object | null;
+  image: string | null;
   rating: number | null;
   title: string;
-  authors: string[];
-  issueYear: string;
+  authors: string[] | null;
+  issueYear: string | null;
   higlight: string;
   button: string;
   list: string;
