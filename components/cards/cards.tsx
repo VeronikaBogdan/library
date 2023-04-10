@@ -11,37 +11,12 @@ import { AppState } from '../../store/rootReducer';
 import { CardGrid } from '../card-grid/card-grid';
 import { CardList } from '../card-list/card-list';
 
-const renderCardGrid: ListRenderItem<Book> = ({ item }) => (
-  <CardGrid
-    image={item.image.url}
-    rating={item.rating}
-    title={item.title}
-    authors={item.authors}
-    issueYear={item.issueYear}
-    button='Забронировать'
-    list=''
-    higlight='clean code'
-  />
-);
-
-const renderCardList: ListRenderItem<Book> = ({ item }) => (
-  <CardList
-    image={item.image.url}
-    rating={item.rating}
-    title={item.title}
-    authors={item.authors}
-    issueYear={item.issueYear}
-    button='Забронировать'
-    list=''
-    higlight='clean code'
-  />
-);
-
 type CardsProps = {
   viewChoice: string;
+  category: string;
 };
 
-export const Cards = ({ viewChoice }: CardsProps) => {
+export const Cards = ({ viewChoice, category }: CardsProps) => {
   const dispatch = useDispatch();
 
   const { books } = useSelector((state: AppState) => state.books);
@@ -49,6 +24,36 @@ export const Cards = ({ viewChoice }: CardsProps) => {
   useEffect(() => {
     dispatch(booksRequest());
   }, [dispatch]);
+
+  const renderCardGrid: ListRenderItem<Book> = ({ item }) => (
+    <CardGrid
+      id={item.id}
+      category={category}
+      image={item.image.url}
+      rating={item.rating}
+      title={item.title}
+      authors={item.authors}
+      issueYear={item.issueYear}
+      button='Забронировать'
+      list=''
+      higlight='clean code'
+    />
+  );
+
+  const renderCardList: ListRenderItem<Book> = ({ item }) => (
+    <CardList
+      id={item.id}
+      category={category}
+      image={item.image.url}
+      rating={item.rating}
+      title={item.title}
+      authors={item.authors}
+      issueYear={item.issueYear}
+      button='Забронировать'
+      list=''
+      higlight='clean code'
+    />
+  );
 
   return (
     <FlatList

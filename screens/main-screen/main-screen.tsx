@@ -7,7 +7,9 @@ import { GRID } from '../../app-constants';
 
 import { Main } from './styled-main-screen';
 
-export const MainScreen = () => {
+type MainScreenProps = { route: any };
+
+export const MainScreen = ({ route }: MainScreenProps) => {
   const [view, setView] = useState(GRID);
 
   const handleChangeView = (viewChoice: string) => {
@@ -17,7 +19,7 @@ export const MainScreen = () => {
   return (
     <Main>
       <Menu onChangeView={handleChangeView} />
-      <Cards viewChoice={view} />
+      <Cards category={route.name} viewChoice={view} />
     </Main>
   );
 };

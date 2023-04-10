@@ -10,6 +10,8 @@ import { Rating } from '../stars/rating';
 import { Author, Title, StyledCard } from './styled-card-grid';
 
 type CardGridProps = {
+  id: number;
+  category: string;
   image: string | null;
   rating: number | null;
   title: string;
@@ -20,11 +22,25 @@ type CardGridProps = {
   list: string;
 };
 
-export const CardGrid = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardGridProps) => {
+export const CardGrid = ({
+  id,
+  category,
+  image,
+  rating,
+  title,
+  authors,
+  issueYear,
+  higlight,
+  button,
+  list,
+}: CardGridProps) => {
   const navigation = useNavigation();
 
   return (
-    <StyledCard activeOpacity={0.5} onPress={() => navigation.navigate('BookScreen')}>
+    <StyledCard
+      activeOpacity={0.5}
+      onPress={() => navigation.navigate('BookScreen', { bookId: id, category: category })}
+    >
       <BookImage image={image} choice={GRID} bookpage='' />
       <Rating amount={rating} choice='' />
       <Title numberOfLines={3}>{title}</Title>

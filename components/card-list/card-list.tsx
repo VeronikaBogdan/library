@@ -9,6 +9,8 @@ import { Rating } from '../stars/rating';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
 
 type CardListProps = {
+  id: number;
+  category: string;
   image: string | null;
   rating: number | null;
   title: string;
@@ -19,11 +21,25 @@ type CardListProps = {
   list: string;
 };
 
-export const CardList = ({ image, rating, title, authors, issueYear, higlight, button, list }: CardListProps) => {
+export const CardList = ({
+  id,
+  category,
+  image,
+  rating,
+  title,
+  authors,
+  issueYear,
+  higlight,
+  button,
+  list,
+}: CardListProps) => {
   const navigation = useNavigation();
 
   return (
-    <StyledCardList activeOpacity={0.5} onPress={() => navigation.navigate('BookScreen')}>
+    <StyledCardList
+      activeOpacity={0.5}
+      onPress={() => navigation.navigate('BookScreen', { bookId: id, category: category })}
+    >
       <BookImage image={image} choice={LIST} bookpage='' />
       <Wrapper>
         <TitleList numberOfLines={3}>{title}</TitleList>
