@@ -25,7 +25,6 @@ instance.interceptors.request.use(
 
 // export const bookById = (bookId: number) => instance.get(`/api/books/${bookId}`);
 export const bookById = (bookId: number) => instance.get(`/${bookId}.json`);
-// export const bookById = (bookId: number) => instance.get(`/2.json`);
 
 export function* bookByIdSaga(action: any) {
   try {

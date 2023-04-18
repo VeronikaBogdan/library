@@ -1,7 +1,10 @@
 import { Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { GRID } from '../../app-constants';
+
+import { bookByIdRequest } from '../../store/bookById/actions';
 
 import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
@@ -34,12 +37,16 @@ export const CardGrid = ({
   button,
   list,
 }: CardGridProps) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   return (
     <StyledCard
       activeOpacity={0.5}
-      onPress={() => navigation.navigate('BookScreen', { bookId: id, category: category })}
+      onPress={() => {
+        navigation.navigate('BookScreen', { bookId: id, category: category });
+        dispatch(bookByIdRequest(id));
+      }}
     >
       <BookImage image={image} choice={GRID} bookpage='' />
       <Rating amount={rating} choice='' />

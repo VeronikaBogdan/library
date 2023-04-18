@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import RNRestart from 'react-native-restart';
 
 import { GRID } from '../../app-constants';
 
@@ -21,8 +20,6 @@ export const Cards = ({ viewChoice, category }: CardsProps) => {
   const dispatch = useDispatch();
 
   const { books, pending } = useSelector((state: AppState) => state.books);
-
-  // console.log('pending books ', pending);
 
   useEffect(() => {
     dispatch(booksRequest());

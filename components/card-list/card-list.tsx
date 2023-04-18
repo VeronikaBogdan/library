@@ -1,7 +1,11 @@
 import { Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { LIST } from '../../app-constants';
+
+import { bookByIdRequest } from '../../store/bookById/actions';
+
 import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
@@ -33,12 +37,16 @@ export const CardList = ({
   button,
   list,
 }: CardListProps) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   return (
     <StyledCardList
       activeOpacity={0.5}
-      onPress={() => navigation.navigate('BookScreen', { bookId: id, category: category })}
+      onPress={() => {
+        navigation.navigate('BookScreen', { bookId: id, category: category });
+        dispatch(bookByIdRequest(id));
+      }}
     >
       <BookImage image={image} choice={LIST} bookpage='' />
       <Wrapper>
