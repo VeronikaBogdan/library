@@ -23,7 +23,8 @@ instance.interceptors.request.use(
   }
 );
 
-export const books = () => instance.get('/api/books');
+// export const books = () => instance.get('/api/books');
+export const books = () => instance.get('/books.json');
 
 export function* booksSaga() {
   try {

@@ -1,9 +1,9 @@
-type Params = {
-  bookId: string;
+export type Params = {
+  bookId: number;
   category: string;
 };
 
-type ScreenProps = {
+export type ScreenProps = {
   route: {
     name: string;
     params: Params;

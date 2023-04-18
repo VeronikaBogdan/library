@@ -3,8 +3,8 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { HOST } from '../../app-constants';
 
-import { CATEGORIES_REQUEST, categoriesSuccess, categoriesFailure } from './actions';
-import { Category } from './types';
+import { BOOK_BY_ID_REQUEST, bookByIdSuccess, bookByIdFailure } from './actions';
+import { BookById } from './types';
 
 export const instance = axios.create({
   baseURL: HOST,
@@ -23,19 +23,20 @@ instance.interceptors.request.use(
   }
 );
 
-// export const categories = () => instance.get('/api/categories');
-export const categories = () => instance.get('/categories.json');
+// export const bookById = (bookId: number) => instance.get(`/api/books/${bookId}`);
+export const bookById = (bookId: number) => instance.get(`/${bookId}.json`);
+// export const bookById = (bookId: number) => instance.get(`/2.json`);
 
-export function* categoriesSaga() {
+export function* bookByIdSaga(action: any) {
   try {
-    const response: { data: Category[] } = yield call(categories);
+    const response: { data: BookById } = yield call(bookById, action.bookId);
     const { data } = response;
-    yield put(categoriesSuccess(data));
+    yield put(bookByIdSuccess(data));
   } catch (error: any) {
-    yield put(categoriesFailure(error.message));
+    yield put(bookByIdFailure(error.message));
   }
 }
 
-export function* watcherSagaForCategories() {
-  yield all([takeLatest(CATEGORIES_REQUEST, categoriesSaga)]);
+export function* watcherSagaForBookById() {
+  yield all([takeLatest(BOOK_BY_ID_REQUEST, bookByIdSaga)]);
 }
