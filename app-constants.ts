@@ -1,6 +1,6 @@
 export const HOST = 'https://veronikabogdan.github.io/my-api/library';
 // export const HOST = 'https://strapi.cleverland.by';
-export const ALL_BOOKS = 'all';
+export const ALL_BOOKS = 'AllBooks';
 export const ASCENDING = 'ascending';
 export const DESCENDING = 'descending';
 export const LIST = 'list';

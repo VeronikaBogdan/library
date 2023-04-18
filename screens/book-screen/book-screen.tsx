@@ -11,7 +11,7 @@ import { RatingBook } from '../../components/rating-book/rating-book';
 import { bookByIdRequest } from '../../store/bookById/actions';
 import { AppState } from '../../store/rootReducer';
 
-import { categoryIdSwitcher } from '../../utils/category-id-switcher';
+import { categorySwitcher } from '../../utils/category-switcher';
 
 import { BreadCrumbsText, BreadCrumbsWrapper, ViewWrapper } from './styled-book-screen';
 
@@ -37,7 +37,7 @@ export const BookScreen = ({ route }: BookScreenProps) => {
         <>
           <BreadCrumbsWrapper>
             <BreadCrumbsText>
-              {categoryIdSwitcher(category)} / {bookById.title}
+              {categorySwitcher(category)} / {bookById.title}
             </BreadCrumbsText>
           </BreadCrumbsWrapper>
           <ViewWrapper>

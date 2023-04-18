@@ -20,8 +20,11 @@ const Drawer = createDrawerNavigator();
 export const Navigation = () => {
   const dispatch = useDispatch();
 
-  const { categories, pending, error } = useSelector((state: AppState) => state.categories);
-  const { books, pending: booksPending, error: booksError } = useSelector((state: AppState) => state.books);
+  const { categories, pending: isPendingCategories } = useSelector((state: AppState) => state.categories);
+  const { books, pending: isBooksPending } = useSelector((state: AppState) => state.books);
+
+  const isPending = isPendingCategories || isBooksPending;
+  const isVisible = !isPending;
 
   const showAmountOfBooks = (category: string) => books.filter((book) => book.categories.includes(category)).length;
 
@@ -50,8 +53,7 @@ export const Navigation = () => {
               drawerActiveTintColor: styles.ORANGE,
             }}
           />
-          {!pending &&
-            !error &&
+          {isVisible &&
             categories.map((category, index) => (
               <Drawer.Screen
                 key={index}

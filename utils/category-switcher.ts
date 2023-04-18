@@ -1,5 +1,5 @@
-export const categoryIdSwitcher = (categoryId: string) => {
-  switch (categoryId) {
+export const categorySwitcher = (category: string) => {
+  switch (category) {
     case 'business':
       return 'Бизнес';
     case 'psychology':

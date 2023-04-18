@@ -4,7 +4,7 @@ import { BooksActions, BooksState } from './types';
 
 const initialState: BooksState = {
   books: [],
-  pending: false,
+  pending: true,
   token: '',
   error: null,
 };

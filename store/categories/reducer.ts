@@ -4,7 +4,7 @@ import { CategoriesActions, CategoriesState } from './types';
 
 const initialState: CategoriesState = {
   categories: [],
-  pending: false,
+  pending: true,
   token: '',
   error: null,
 };

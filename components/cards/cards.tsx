@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
-import { FlatList, ListRenderItem } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { FlatList, ListRenderItem, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { GRID } from '../../app-constants';
+import { ALL_BOOKS, GRID } from '../../app-constants';
 
-import { booksRequest } from '../../store/books/actions';
 import { Book } from '../../store/books/types';
 import { AppState } from '../../store/rootReducer';
+import { categorySwitcher } from '../../utils/category-switcher';
 
 import { CardGrid } from '../card-grid/card-grid';
 import { CardList } from '../card-list/card-list';
+
+import { NoBooksText, NoBooksView } from './styled-cards';
 
 type CardsProps = {
   viewChoice: string;
@@ -17,13 +18,18 @@ type CardsProps = {
 };
 
 export const Cards = ({ viewChoice, category }: CardsProps) => {
-  const dispatch = useDispatch();
+  const { books } = useSelector((state: AppState) => state.books);
 
-  const { books, pending } = useSelector((state: AppState) => state.books);
+  const filteredBooksByCategory = books.filter((book: Book) => book.categories.includes(categorySwitcher(category)));
 
-  useEffect(() => {
-    dispatch(booksRequest());
-  }, [dispatch]);
+  let receivedBooks = category === ALL_BOOKS ? books : filteredBooksByCategory;
+
+  if (!receivedBooks.length)
+    return (
+      <NoBooksView>
+        <NoBooksText>В этой категории книг ещё нет</NoBooksText>
+      </NoBooksView>
+    );
 
   const renderCardGrid: ListRenderItem<Book> = ({ item }) => (
     <CardGrid
@@ -57,7 +63,7 @@ export const Cards = ({ viewChoice, category }: CardsProps) => {
 
   return (
     <FlatList
-      data={books}
+      data={receivedBooks}
       keyExtractor={(card: Book) => card.id.toString()}
       renderItem={viewChoice === GRID ? renderCardGrid : renderCardList}
     />
