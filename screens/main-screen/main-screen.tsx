@@ -7,6 +7,7 @@ import { AppState } from '../../store/rootReducer';
 
 import { Cards } from '../../components/cards/cards';
 import { Menu } from '../../components/menu/menu';
+import { Loader } from '../../components/loader/loader';
 
 import { Main } from './styled-main-screen';
 
@@ -15,11 +16,12 @@ type MainScreenProps = { route: any };
 export const MainScreen = ({ route }: MainScreenProps) => {
   const [view, setView] = useState(GRID);
 
-  const { pending: isPendingCategories } = useSelector((state: AppState) => state.categories);
-  const { pending: isBooksPending } = useSelector((state: AppState) => state.books);
+  const { pending: isPendingCategories, error: isErrorCategories } = useSelector((state: AppState) => state.categories);
+  const { pending: isPendingBooks, error: isErrorBooks } = useSelector((state: AppState) => state.books);
 
-  const isPending = isPendingCategories || isBooksPending;
-  const isVisible = !isPending;
+  const isPending = isPendingCategories || isPendingBooks;
+  const isError = isErrorBooks || isErrorCategories;
+  const isVisible = !isPending && !isError;
 
   const handleChangeView = (viewChoice: string) => {
     setView(viewChoice);
@@ -27,8 +29,9 @@ export const MainScreen = ({ route }: MainScreenProps) => {
 
   return (
     <Main>
-      {isPending && <Text>Loading...</Text>}
-      <Menu onChangeView={handleChangeView} />
+      {isPendingBooks && <Loader />}
+      {isError && <Text>Error</Text>}
+      {isVisible && <Menu onChangeView={handleChangeView} />}
       {isVisible && <Cards category={route.name} viewChoice={view} />}
     </Main>
   );

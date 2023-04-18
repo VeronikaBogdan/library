@@ -32,7 +32,7 @@ export function* categoriesSaga() {
     const { data } = response;
     yield put(categoriesSuccess(data));
   } catch (error: any) {
-    yield put(categoriesFailure(error.message));
+    yield put(categoriesFailure(error));
   }
 }
 

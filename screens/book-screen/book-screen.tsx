@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,6 +7,7 @@ import { CardLarge } from '../../components/card-large/card-large';
 import { Comments } from '../../components/comments/comments';
 import { DetailsInfo } from '../../components/details-info/details-info';
 import { RatingBook } from '../../components/rating-book/rating-book';
+import { Loader } from '../../components/loader/loader';
 
 import { bookByIdRequest } from '../../store/bookById/actions';
 import { AppState } from '../../store/rootReducer';
@@ -21,7 +22,9 @@ export const BookScreen = ({ route }: BookScreenProps) => {
   const dispatch = useDispatch();
   const { bookId, category } = route.params;
 
-  const { bookById, pending } = useSelector((state: AppState) => state.bookById);
+  const { bookById, pending, error } = useSelector((state: AppState) => state.bookById);
+
+  const isVisible = !pending && !error;
 
   useEffect(() => {
     dispatch(bookByIdRequest(bookId));
@@ -31,9 +34,9 @@ export const BookScreen = ({ route }: BookScreenProps) => {
     <ScrollView
       refreshControl={<RefreshControl refreshing={pending} onRefresh={() => dispatch(bookByIdRequest(bookId))} />}
     >
-      {pending ? (
-        <BreadCrumbsText>Загрузка</BreadCrumbsText>
-      ) : (
+      {pending && <Loader />}
+      {error && <BreadCrumbsText>Error</BreadCrumbsText>}
+      {isVisible && (
         <>
           <BreadCrumbsWrapper>
             <BreadCrumbsText>

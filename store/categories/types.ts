@@ -10,7 +10,7 @@ export interface CategoriesState {
   categories: Category[];
   pending: boolean;
   token: string;
-  error: string | null;
+  error: boolean | null;
 }
 
 // export interface CategoriesPayload {

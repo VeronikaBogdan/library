@@ -6,7 +6,7 @@ const initialState: CategoriesState = {
   categories: [],
   pending: true,
   token: '',
-  error: null,
+  error: false,
 };
 
 export default (state = initialState, action: CategoriesActions) => {
@@ -17,8 +17,7 @@ export default (state = initialState, action: CategoriesActions) => {
       const { categories } = action;
       return { ...state, categories: categories, pending: false, error: null };
     case CATEGORIES_FAILURE:
-      const { error } = action;
-      return { ...state, pending: false, error: error };
+      return { ...state, pending: false, error: true };
     default:
       return { ...state };
   }

@@ -45,7 +45,7 @@ export interface BooksState {
   books: Book[];
   pending: boolean;
   token: string;
-  error: string | null;
+  error: boolean | null;
 }
 
 export interface BooksRequest {

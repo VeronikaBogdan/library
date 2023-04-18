@@ -43,7 +43,7 @@ export interface BookByIdState {
   bookById: BookById;
   pending: boolean;
   token: string;
-  error: string | null;
+  error: boolean | null;
 }
 
 export interface BookByIdRequest {

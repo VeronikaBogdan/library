@@ -32,7 +32,7 @@ export function* booksSaga() {
     const { data } = response;
     yield put(booksSuccess(data));
   } catch (error: any) {
-    yield put(booksFailure(error.message));
+    yield put(booksFailure(error));
   }
 }
 

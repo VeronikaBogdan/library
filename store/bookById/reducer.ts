@@ -6,7 +6,7 @@ const initialState: BookByIdState = {
   bookById: {} as BookById,
   pending: true,
   token: '',
-  error: null,
+  error: false,
 };
 
 export default (state = initialState, action: BookByIdActions) => {
@@ -17,8 +17,7 @@ export default (state = initialState, action: BookByIdActions) => {
       const { bookById: bookById } = action;
       return { ...state, bookById: bookById, pending: false };
     case BOOK_BY_ID_FAILURE:
-      const { error } = action;
-      return { ...state, pending: false, error: error };
+      return { ...state, pending: false, error: true };
     default:
       return { ...state };
   }

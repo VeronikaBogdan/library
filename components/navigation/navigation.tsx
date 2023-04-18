@@ -20,11 +20,16 @@ const Drawer = createDrawerNavigator();
 export const Navigation = () => {
   const dispatch = useDispatch();
 
-  const { categories, pending: isPendingCategories } = useSelector((state: AppState) => state.categories);
-  const { books, pending: isBooksPending } = useSelector((state: AppState) => state.books);
+  const {
+    categories,
+    pending: isPendingCategories,
+    error: isErrorCategories,
+  } = useSelector((state: AppState) => state.categories);
+  const { books, pending: isPendingBooks, error: isErrorBooks } = useSelector((state: AppState) => state.books);
 
-  const isPending = isPendingCategories || isBooksPending;
-  const isVisible = !isPending;
+  const isPending = isPendingCategories || isPendingBooks;
+  const isError = isErrorBooks || isErrorCategories;
+  const isVisible = !isPending && !isError;
 
   const showAmountOfBooks = (category: string) => books.filter((book) => book.categories.includes(category)).length;
 

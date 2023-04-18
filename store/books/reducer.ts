@@ -6,7 +6,7 @@ const initialState: BooksState = {
   books: [],
   pending: true,
   token: '',
-  error: null,
+  error: false,
 };
 
 export default (state = initialState, action: BooksActions) => {
@@ -17,8 +17,7 @@ export default (state = initialState, action: BooksActions) => {
       const { books } = action;
       return { ...state, books: books, pending: false, error: null };
     case BOOKS_FAILURE:
-      const { error } = action;
-      return { ...state, pending: false, error: error };
+      return { ...state, pending: false, error: true };
     default:
       return { ...state };
   }
