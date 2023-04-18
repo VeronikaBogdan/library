@@ -14,7 +14,7 @@ export interface Comment {
   rating: number;
   text: string | null;
   createdAt: string;
-  user: User[];
+  user: User;
 }
 
 export interface BookById {

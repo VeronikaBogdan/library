@@ -19,7 +19,6 @@ type BookScreenProps = { route: any };
 
 export const BookScreen = ({ route }: BookScreenProps) => {
   const dispatch = useDispatch();
-  const [loading, toggleLoading] = useState(true);
   const { bookId, category } = route.params;
 
   const { bookById, pending } = useSelector((state: AppState) => state.bookById);
@@ -30,19 +29,25 @@ export const BookScreen = ({ route }: BookScreenProps) => {
 
   return (
     <ScrollView
-      refreshControl={<RefreshControl refreshing={!loading} onRefresh={() => dispatch(bookByIdRequest(bookId))} />}
+      refreshControl={<RefreshControl refreshing={pending} onRefresh={() => dispatch(bookByIdRequest(bookId))} />}
     >
-      <BreadCrumbsWrapper>
-        <BreadCrumbsText>
-          {categoryIdSwitcher(category)} / {bookById.title}
-        </BreadCrumbsText>
-      </BreadCrumbsWrapper>
-      <ViewWrapper>
-        <CardLarge bookId={bookId} />
-        <RatingBook />
-        <DetailsInfo />
-        <Comments />
-      </ViewWrapper>
+      {pending ? (
+        <BreadCrumbsText>Загрузка</BreadCrumbsText>
+      ) : (
+        <>
+          <BreadCrumbsWrapper>
+            <BreadCrumbsText>
+              {categoryIdSwitcher(category)} / {bookById.title}
+            </BreadCrumbsText>
+          </BreadCrumbsWrapper>
+          <ViewWrapper>
+            <CardLarge />
+            <RatingBook />
+            <DetailsInfo />
+            <Comments />
+          </ViewWrapper>
+        </>
+      )}
     </ScrollView>
   );
 };

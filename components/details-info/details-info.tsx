@@ -1,20 +1,24 @@
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { AppState } from '../../store/rootReducer';
 
 import { Detail, DetailName, DetailText, DetailsTitle } from './styled-details-info';
 
 export const DetailsInfo = () => {
+  const { bookById } = useSelector((state: AppState) => state.bookById);
+
+  const { publish, issueYear, pages, cover, format, weight, ISBN, producer } = bookById;
+
   const details = [
-    { name: 'Издательство', text: 'Питер' },
-    { name: 'Год издания', text: '2019' },
-    { name: 'Страниц', text: '288' },
-    { name: 'Переплёт', text: 'Мягкая обложка' },
-    { name: 'Формат', text: '70x100' },
-    { name: 'Жанр', text: '370г' },
-    { name: 'ISBN', text: '978-5-4461-0923-4' },
-    {
-      name: 'Изготовитель',
-      text: 'ООО «Питер Мейл». РФ, 198 206, г. Санкт-Петербург, Петергофское ш, д. 73, лит. А29',
-    },
+    { name: 'Издательство', text: publish },
+    { name: 'Год издания', text: issueYear },
+    { name: 'Страниц', text: pages },
+    { name: 'Переплёт', text: cover },
+    { name: 'Формат', text: format },
+    { name: 'Жанр', text: weight },
+    { name: 'ISBN', text: ISBN },
+    { name: 'Изготовитель', text: producer },
   ];
 
   return (

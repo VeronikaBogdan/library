@@ -1,10 +1,15 @@
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { AppState } from '../../store/rootReducer';
+
 import { Rating } from '../stars/rating';
 
 import { NoRatingText, RatingNumber, RatingTitle, RatingWrapper } from './styled-rating-book';
 
 export const RatingBook = () => {
-  const rating: number = null;
+  const { bookById } = useSelector((state: AppState) => state.bookById);
+  const rating = bookById.rating;
 
   return (
     <View>
