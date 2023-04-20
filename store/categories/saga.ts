@@ -37,5 +37,5 @@ export function* categoriesSaga() {
 }
 
 export function* watcherSagaForCategories() {
-  yield all([takeLatest(CATEGORIES_REQUEST, categoriesSaga)]);
+  yield takeLatest(CATEGORIES_REQUEST, categoriesSaga);
 }

@@ -37,5 +37,5 @@ export function* bookByIdSaga(action: any) {
 }
 
 export function* watcherSagaForBookById() {
-  yield all([takeLatest(BOOK_BY_ID_REQUEST, bookByIdSaga)]);
+  yield takeLatest(BOOK_BY_ID_REQUEST, bookByIdSaga);
 }
