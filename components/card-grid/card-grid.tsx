@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GRID } from '../../app-constants';
 
 import { bookByIdRequest } from '../../store/bookById/actions';
+import { Image } from '../../store/books/types';
 
 import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
@@ -15,7 +16,7 @@ import { Author, Title, StyledCard } from './styled-card-grid';
 type CardGridProps = {
   id: number;
   category: string;
-  image: string | null;
+  image: Image;
   rating: number | null;
   title: string;
   authors: string[] | null;

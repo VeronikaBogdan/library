@@ -41,7 +41,7 @@ export const Cards = ({ viewChoice, sortChoice, category }: CardsProps) => {
     <CardGrid
       id={item.id}
       category={category}
-      image={item.image.url}
+      image={item.image}
       rating={item.rating}
       title={item.title}
       authors={item.authors}
@@ -56,7 +56,7 @@ export const Cards = ({ viewChoice, sortChoice, category }: CardsProps) => {
     <CardList
       id={item.id}
       category={category}
-      image={item.image.url}
+      image={item.image}
       rating={item.rating}
       title={item.title}
       authors={item.authors}
