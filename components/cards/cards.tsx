@@ -1,9 +1,10 @@
-import { FlatList, ListRenderItem, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { FlatList, ListRenderItem, RefreshControl } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ALL_BOOKS, GRID } from '../../app-constants';
 
 import { Book } from '../../store/books/types';
+import { booksRequest } from '../../store/books/actions';
 import { AppState } from '../../store/rootReducer';
 import { categorySwitcher } from '../../utils/category-switcher';
 
@@ -18,7 +19,8 @@ type CardsProps = {
 };
 
 export const Cards = ({ viewChoice, category }: CardsProps) => {
-  const { books } = useSelector((state: AppState) => state.books);
+  const dispatch = useDispatch();
+  const { books, pending } = useSelector((state: AppState) => state.books);
 
   const filteredBooksByCategory = books.filter((book: Book) => book.categories.includes(categorySwitcher(category)));
 
@@ -66,6 +68,7 @@ export const Cards = ({ viewChoice, category }: CardsProps) => {
       data={receivedBooks}
       keyExtractor={(card: Book) => card.id.toString()}
       renderItem={viewChoice === GRID ? renderCardGrid : renderCardList}
+      refreshControl={<RefreshControl refreshing={pending} onRefresh={() => dispatch(booksRequest())} />}
     />
   );
 };
