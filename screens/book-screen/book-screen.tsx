@@ -8,6 +8,7 @@ import { Comments } from '../../components/comments/comments';
 import { DetailsInfo } from '../../components/details-info/details-info';
 import { RatingBook } from '../../components/rating-book/rating-book';
 import { Loader } from '../../components/loader/loader';
+import { ErrorView } from '../../components/error/error';
 
 import { bookByIdRequest } from '../../store/bookById/actions';
 import { AppState } from '../../store/rootReducer';
@@ -35,7 +36,7 @@ export const BookScreen = ({ route }: BookScreenProps) => {
       refreshControl={<RefreshControl refreshing={pending} onRefresh={() => dispatch(bookByIdRequest(bookId))} />}
     >
       {pending && <Loader />}
-      {error && <BreadCrumbsText>Error</BreadCrumbsText>}
+      {error && <ErrorView />}
       {isVisible && (
         <>
           <BreadCrumbsWrapper>

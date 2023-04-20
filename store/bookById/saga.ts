@@ -32,7 +32,7 @@ export function* bookByIdSaga(action: any) {
     const { data } = response;
     yield put(bookByIdSuccess(data));
   } catch (error: any) {
-    yield put(bookByIdFailure(error.message));
+    yield put(bookByIdFailure(error));
   }
 }
 

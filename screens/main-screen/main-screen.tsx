@@ -8,6 +8,7 @@ import { AppState } from '../../store/rootReducer';
 import { Cards } from '../../components/cards/cards';
 import { Menu } from '../../components/menu/menu';
 import { Loader } from '../../components/loader/loader';
+import { ErrorView } from '../../components/error/error';
 
 import { Main } from './styled-main-screen';
 
@@ -30,7 +31,7 @@ export const MainScreen = ({ route }: MainScreenProps) => {
   return (
     <Main>
       {isPendingBooks && <Loader />}
-      {isError && <Text>Error</Text>}
+      {isError && <ErrorView />}
       {isVisible && <Menu onChangeView={handleChangeView} />}
       {isVisible && <Cards category={route.name} viewChoice={view} />}
     </Main>
