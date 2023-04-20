@@ -23,7 +23,7 @@ export const Rating = ({ amount, choice }: RatingProps): JSX.Element => {
     <StyledRating>
       {amount ? (
         array.map((_, index) =>
-          index < amount - 1 ? (
+          index < amount ? (
             <StarDefault width={size} height={size} key={index} />
           ) : (
             <StarOutline width={size} height={size} key={Math.random()} />

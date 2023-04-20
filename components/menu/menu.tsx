@@ -14,13 +14,19 @@ import { ButtonWrapper, MenuWrapper, SortButton } from './styled-menu';
 
 type MenuProps = {
   onChangeView: Function;
+  onChangeSort: Function;
 };
 
-export const Menu = ({ onChangeView }: MenuProps) => {
+export const Menu = ({ onChangeView, onChangeSort }: MenuProps) => {
   const [viewChoice, setViewChoice] = useState(LIST);
+  const [sortChoice, setSortChoice] = useState(ASCENDING);
 
   const handleChangeView = () => {
     onChangeView(viewChoice);
+  };
+
+  const handleChangeSort = () => {
+    onChangeSort(sortChoice);
   };
 
   return (
@@ -29,9 +35,27 @@ export const Menu = ({ onChangeView }: MenuProps) => {
         <SortButton color='white'>
           <IconSearch />
         </SortButton>
-        <SortButton color='white'>
-          <SortAsc />
-        </SortButton>
+        {sortChoice === DESCENDING ? (
+          <SortButton
+            color='white'
+            onPress={() => {
+              handleChangeSort();
+              setSortChoice(ASCENDING);
+            }}
+          >
+            <SortDesc />
+          </SortButton>
+        ) : (
+          <SortButton
+            color='white'
+            onPress={() => {
+              handleChangeSort();
+              setSortChoice(DESCENDING);
+            }}
+          >
+            <SortAsc />
+          </SortButton>
+        )}
       </ButtonWrapper>
       {viewChoice === LIST ? (
         <ButtonWrapper>

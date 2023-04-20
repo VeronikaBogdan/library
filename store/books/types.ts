@@ -1,7 +1,7 @@
 import { BOOKS_REQUEST, BOOKS_SUCCESS, BOOKS_FAILURE } from './actions';
 
 export interface Image {
-  url: string;
+  url: string | null;
 }
 
 export interface Booking {
