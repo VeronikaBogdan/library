@@ -42,8 +42,10 @@ export const MainScreen = ({ route }: MainScreenProps) => {
     <Main>
       {isPendingBooks && <Loader />}
       {isError && <ErrorView />}
-      {isVisible && <Menu onChangeView={handleChangeView} onChangeSort={handleChangeSort} />}
-      {isVisible && <Cards category={route.name} viewChoice={view} sortChoice={sort} />}
+      {isVisible && (
+        <Menu onChangeView={handleChangeView} onChangeSort={handleChangeSort} onChangeSearch={handleChangeSearch} />
+      )}
+      {isVisible && <Cards category={route.name} viewChoice={view} sortChoice={sort} searchTitle={searchTitle} />}
     </Main>
   );
 };

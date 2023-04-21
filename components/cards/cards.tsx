@@ -8,6 +8,7 @@ import { booksRequest } from '../../store/books/actions';
 import { AppState } from '../../store/rootReducer';
 import { categorySwitcher } from '../../utils/category-switcher';
 import { sortBooksByRating } from '../../utils/books-by-rating-sorter';
+import { filterBooksBySearch } from '../../utils/books-by-search-filter';
 
 import { CardGrid } from '../card-grid/card-grid';
 import { CardList } from '../card-list/card-list';
@@ -17,10 +18,11 @@ import { NoBooksText, NoBooksView } from './styled-cards';
 type CardsProps = {
   viewChoice: string;
   sortChoice: string;
+  searchTitle: string;
   category: string;
 };
 
-export const Cards = ({ viewChoice, sortChoice, category }: CardsProps) => {
+export const Cards = ({ viewChoice, sortChoice, searchTitle, category }: CardsProps) => {
   const dispatch = useDispatch();
   const { books, pending } = useSelector((state: AppState) => state.books);
 
@@ -28,12 +30,20 @@ export const Cards = ({ viewChoice, sortChoice, category }: CardsProps) => {
 
   let receivedBooks = category === ALL_BOOKS ? books : filteredBooksByCategory;
 
-  sortBooksByRating(receivedBooks, sortChoice);
-
   if (!receivedBooks.length)
     return (
       <NoBooksView>
         <NoBooksText>В этой категории книг ещё нет</NoBooksText>
+      </NoBooksView>
+    );
+
+  sortBooksByRating(receivedBooks, sortChoice);
+  receivedBooks = filterBooksBySearch(receivedBooks, searchTitle);
+
+  if (!receivedBooks.length)
+    return (
+      <NoBooksView>
+        <NoBooksText>По запросу ничего не найдено</NoBooksText>
       </NoBooksView>
     );
 
@@ -48,7 +58,7 @@ export const Cards = ({ viewChoice, sortChoice, category }: CardsProps) => {
       issueYear={item.issueYear}
       button='Забронировать'
       list=''
-      higlight='clean code'
+      higlight={searchTitle}
     />
   );
 
