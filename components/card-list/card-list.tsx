@@ -11,6 +11,7 @@ import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
 
+import { ACCENT } from '../../styles/constant';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
 
 type CardListProps = {
@@ -51,7 +52,12 @@ export const CardList = ({
     >
       <BookImage image={image} choice={LIST} bookpage='' />
       <Wrapper>
-        <TitleList numberOfLines={3}>{title}</TitleList>
+        <TitleList
+          highlightStyle={{ color: ACCENT }}
+          searchWords={[higlight]}
+          textToHighlight={title}
+          numberOfLines={3}
+        />
         <AuthorList numberOfLines={3}>
           {authors.map((author, index) => (
             <Text key={index}>{author}, </Text>

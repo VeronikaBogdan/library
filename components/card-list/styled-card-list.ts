@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 import * as styles from '../../styles/constant';
-import { Author, Title, StyledCard } from '../card-grid/styled-card-grid';
+import { Author, HighlightTitle, StyledCard } from '../card-grid/styled-card-grid';
 
 export const StyledCardList = styled(StyledCard)`
   flex-direction: row;
@@ -15,7 +15,7 @@ export const Wrapper = styled.View`
   margin-left: 8px;
 `;
 
-export const TitleList = styled(Title)`
+export const TitleList = styled(HighlightTitle)`
   margin-top: 0;
 `;
 

@@ -2157,6 +2157,14 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.2.1.tgz#9403f51c17cae37edf870c6bc0c81c1ece5ccef8"
   integrity sha512-1dgmkh+3so0+LlBWRhGA33ua4MYr7tUOj+a9Si28vUi0IUFNbff1T3sgpeDJI/LaC75bBYnQ0A3wXjn0OrRNBA==
 
+"@sanar/react-native-highlight-text@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@sanar/react-native-highlight-text/-/react-native-highlight-text-1.0.2.tgz#3109442e610095efa647ef49a094d6e143d4b30a"
+  integrity sha512-+mhWujE0YcagtTWHIipSSTAz4ROCmDTLl5MwIL1WtO9ohnMVWPRuZTeqwrJ5kQbSjHZ+/sdZfg1gGU7enNPB4g==
+  dependencies:
+    highlight-words-core "^1.2.0"
+    prop-types "^15.7.2"
+
 "@segment/loosely-validate-event@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@segment/loosely-validate-event/-/loosely-validate-event-2.0.0.tgz#87dfc979e5b4e7b82c5f1d8b722dfd5d77644681"
@@ -6983,6 +6991,11 @@ hermes-profile-transformer@^0.0.6:
   integrity sha512-cnN7bQUm65UWOy6cbGcCcZ3rpwW8Q/j4OP5aWRhEry4Z2t2aR1cjrbp0BS+KiBN0smvP1caBgAuxutvyvJILzQ==
   dependencies:
     source-map "^0.7.3"
+
+highlight-words-core@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/highlight-words-core/-/highlight-words-core-1.2.2.tgz#1eff6d7d9f0a22f155042a00791237791b1eeaaa"
+  integrity sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"

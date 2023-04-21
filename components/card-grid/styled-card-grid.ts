@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import HighlightText from '@sanar/react-native-highlight-text';
 
 import * as styles from '../../styles/constant';
 
@@ -12,7 +13,7 @@ export const StyledCard = styled.TouchableOpacity`
   margin: 8px 16px;
 `;
 
-export const Title = styled.Text`
+export const HighlightTitle = styled(HighlightText)`
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
@@ -20,7 +21,7 @@ export const Title = styled.Text`
   margin-top: 16px;
 `;
 
-export const Author = styled(Title)`
+export const Author = styled.Text`
   font-weight: 400;
   color: ${styles.BLACK70};
   margin-top: 8px;

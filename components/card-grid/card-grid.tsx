@@ -11,7 +11,8 @@ import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
 
-import { Author, Title, StyledCard } from './styled-card-grid';
+import { ACCENT } from '../../styles/constant';
+import { Author, HighlightTitle, StyledCard } from './styled-card-grid';
 
 type CardGridProps = {
   id: number;
@@ -51,7 +52,12 @@ export const CardGrid = ({
     >
       <BookImage image={image} choice={GRID} bookpage='' />
       <Rating amount={rating} choice='' />
-      <Title numberOfLines={3}>{title}</Title>
+      <HighlightTitle
+        highlightStyle={{ color: ACCENT }}
+        searchWords={[higlight]}
+        textToHighlight={title}
+        numberOfLines={3}
+      />
       <Author numberOfLines={3}>
         {authors.map((author, index) => (
           <Text key={index}>{author}, </Text>

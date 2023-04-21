@@ -73,7 +73,7 @@ export const Cards = ({ viewChoice, sortChoice, searchTitle, category }: CardsPr
       issueYear={item.issueYear}
       button='Забронировать'
       list=''
-      higlight='clean code'
+      higlight={searchTitle}
     />
   );
 
