@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { LIST } from '../../app-constants';
 
 import { bookByIdRequest } from '../../store/bookById/actions';
-import { Image } from '../../store/books/types';
 
 import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
@@ -17,7 +16,7 @@ import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-li
 type CardListProps = {
   id: number;
   category: string;
-  image: Image;
+  image: number;
   rating: number | null;
   title: string;
   authors: string[] | null;

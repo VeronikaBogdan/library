@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { RefreshControl, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Slash from '../../assets/svg/slash.svg';
 import { CardLarge } from '../../components/card-large/card-large';
 import { Comments } from '../../components/comments/comments';
 import { DetailsInfo } from '../../components/details-info/details-info';
-import { RatingBook } from '../../components/rating-book/rating-book';
-import { Loader } from '../../components/loader/loader';
 import { ErrorView } from '../../components/error/error';
+import { Loader } from '../../components/loader/loader';
+import { RatingBook } from '../../components/rating-book/rating-book';
 
 import { bookByIdRequest } from '../../store/bookById/actions';
 import { AppState } from '../../store/rootReducer';

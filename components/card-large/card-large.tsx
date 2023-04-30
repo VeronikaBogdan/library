@@ -12,11 +12,11 @@ import { AboutBookText, AboutBookTitle, AuthorLarge, Description, TitleLarge } f
 
 export const CardLarge = () => {
   const { bookById } = useSelector((state: AppState) => state.bookById);
-  const { title, authors, issueYear, description, images } = bookById;
+  const { id, title, authors, issueYear, description } = bookById;
 
   return (
     <View>
-      <BookImage image={images.url} choice={BOOKPAGE} bookpage='' />
+      <BookImage image={id} choice={BOOKPAGE} bookpage={id} />
       <Description>
         <TitleLarge>{title}</TitleLarge>
         <AuthorLarge>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { HOST } from '../../app-constants';
 
@@ -13,9 +13,9 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   (res) => {
     //   res.headers['Authorization'] = `Bearer ${localStorage.getItem('jwtToken')}`;
-    res.headers[
-      'Authorization'
-    ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEyMSwiaWF0IjoxNjgwMjI1OTA3LCJleHAiOjE2ODI4MTc5MDd9.icXXUYIAvmpu_-qemPBdsoyO2-ER4fS3kSYI2ph7V0Q`;
+    // res.headers[
+    //   'Authorization'
+    // ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEyMSwiaWF0IjoxNjgwMjI1OTA3LCJleHAiOjE2ODI4MTc5MDd9.icXXUYIAvmpu_-qemPBdsoyO2-ER4fS3kSYI2ph7V0Q`;
     return res;
   },
   (error) => {
@@ -24,7 +24,7 @@ instance.interceptors.request.use(
 );
 
 // export const categories = () => instance.get('/api/categories');
-export const categories = () => instance.get('/categories.json');
+export const categories = () => instance.get('/categories/categories.json');
 
 export function* categoriesSaga() {
   try {

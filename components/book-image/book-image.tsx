@@ -1,14 +1,12 @@
-import { HOST, GRID, LIST, BOOKPAGE } from '../../app-constants';
+import { IMAGE_HOST, GRID, LIST, BOOKPAGE } from '../../app-constants';
 import IconCat from '../../assets/svg/icon-cat.svg';
-
-import { Image as ImageType } from '../../store/books/types';
 
 import { Image, ImageLarge, ImageList, NoImage, NoImageLarge, NoImageList } from './styled-book-image';
 
 type BookImageProps = {
-  image: ImageType;
+  image: number;
   choice: string;
-  bookpage: string;
+  bookpage: number;
 };
 
 export const BookImage = ({ image, choice, bookpage }: BookImageProps) => {
@@ -24,13 +22,13 @@ export const BookImage = ({ image, choice, bookpage }: BookImageProps) => {
         <IconCat width={35} height={35} />
       </NoImageList>
     );
-  if (image && choice === LIST) return <ImageList source={{ uri: `${HOST}${image.url}` }} />;
+  if (image && choice === LIST) return <ImageList source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
   if (!bookpage && choice === BOOKPAGE)
     return (
       <NoImageLarge>
         <IconCat />
       </NoImageLarge>
     );
-  if (bookpage && choice === BOOKPAGE) return <ImageLarge source={{ uri: `${HOST}${image.url}` }} />;
-  return <Image source={{ uri: `${HOST}${image.url}` }} />;
+  if (bookpage && choice === BOOKPAGE) return <ImageLarge source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
+  return <Image source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
 };
