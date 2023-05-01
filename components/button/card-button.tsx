@@ -16,9 +16,10 @@ type CardButtonProps = {
   list: string;
   choice: string;
   bookpage: string;
+  onPress: Function;
 };
 
-export const CardButton = ({ text, list, choice, bookpage }: CardButtonProps) => {
+export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButtonProps) => {
   if (choice === 'grid') {
     if (text === 'Забронировать')
       return (
@@ -66,9 +67,9 @@ export const CardButton = ({ text, list, choice, bookpage }: CardButtonProps) =>
           <StyledTextBook>{text}</StyledTextBook>
         </BookScreenButton>
       );
-    if (text === 'Оценить книгу')
+    if (text === 'Оценить книгу' || 'Оценить')
       return (
-        <AssessScreenButton>
+        <AssessScreenButton onPress={onPress}>
           <StyledTextBook>{text}</StyledTextBook>
         </AssessScreenButton>
       );

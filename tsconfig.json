@@ -43,8 +43,12 @@
             "aspect-ratio",
             "elevation",
             "include-font-padding",
-            "text-align-vertical"
-          ]
+            "text-align-vertical",
+            "border-bottom-width",
+            "border-bottom-color",
+            "border-width",
+            "border-color"  
+        ]
         }
       }
     ]

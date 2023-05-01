@@ -46,7 +46,7 @@ export const BookScreenButton = styled(BookButton)`
   margin-top: 0px;
 `;
 
-export const AssessScreenButton = styled(BookButton)`
+export const AssessScreenButton = styled(BookButton).attrs(({ onPress }) => ({ onPress: onPress }))`
   margin-top: 15px;
 `;
 
