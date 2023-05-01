@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, Text } from 'react-native';
+import { Modal, Text, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 
 import Cross from '../../../assets/svg/cross.svg';
@@ -10,10 +10,12 @@ import { ORANGE } from '../../../styles/constant';
 import { ModalTitle, StyledModalView } from '../styled-modal';
 import { RateText, RatingInput, TextInput } from './styled-rate-book';
 
-export const RateBookModal = ({ visible }: { visible: boolean }) => {
-  const [text, setText] = useState('');
-  const [amount, setAmount] = useState('');
-  const [isVisible, setVisibility] = useState(visible);
+export const RateBookModal = ({ visible }: { visible: Function }) => {
+  const [isVisible, setVisibility] = useState(false);
+
+  const handleVisible = () => {
+    visible(isVisible);
+  };
 
   const {
     control,
@@ -21,6 +23,8 @@ export const RateBookModal = ({ visible }: { visible: boolean }) => {
     getValues,
     formState: { errors },
   } = useForm({
+    criteriaMode: 'all',
+    mode: 'all',
     defaultValues: {
       id: ~~(Math.random() * (1000 - 1) + 1),
       createdAt: new Date().toISOString(),
@@ -31,15 +35,24 @@ export const RateBookModal = ({ visible }: { visible: boolean }) => {
       //   }
     },
   });
-  const onSubmit = (data: any) => console.log(data);
 
-  //   console.log(visible);
-  //   console.log(isVisible);
+  const onSubmit = (data: any) => {
+    console.log(data);
+    handleVisible();
+    setVisibility(false);
+  };
 
   return (
     <Modal animationType='fade' transparent={true}>
       <StyledModalView>
-        <Cross width={35} height={35} onPress={() => setVisibility(!isVisible)} />
+        <TouchableOpacity
+          onPress={() => {
+            handleVisible();
+            setVisibility(false);
+          }}
+        >
+          <Cross width={35} height={35} />
+        </TouchableOpacity>
         <ModalTitle>Оцените книгу</ModalTitle>
         <RateText>Ваша оценка: </RateText>
         <Controller
@@ -62,8 +75,7 @@ export const RateBookModal = ({ visible }: { visible: boolean }) => {
           name='rating'
         />
         {errors.rating && <Text>Это обязательное поле с допустимыми значениями от 1 до 5</Text>}
-        <Rating amount={getValues('rating')} choice='bookscreen' />
-
+        <Rating amount={Number(getValues('rating'))} choice='bookscreen' />
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
@@ -78,7 +90,6 @@ export const RateBookModal = ({ visible }: { visible: boolean }) => {
           )}
           name='text'
         />
-        {errors.text && <Text>Это обязательное поле</Text>}
         <CardButton text='Оценить' bookpage='bookpage' onPress={handleSubmit(onSubmit)} list='' choice='' />
       </StyledModalView>
     </Modal>

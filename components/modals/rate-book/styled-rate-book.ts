@@ -25,7 +25,8 @@ export const RatingInput = styled.TextInput`
 
 export const TextInput = styled.TextInput`
   width: 100%;
-  height: 50%;
+  min-height: 25px;
+  height: 30%;
   background-color: ${WHITE};
   color: ${BLACK70};
   font-weight: 400;

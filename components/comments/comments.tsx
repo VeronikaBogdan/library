@@ -10,7 +10,7 @@ import { AppState } from '../../store/rootReducer';
 import { SectionTitle } from '../../screens/book-screen/styled-book-screen';
 import { Rating } from '../stars/rating';
 
-import { dateFormatter } from '../../utils/date-formatter';
+import { dateFormatter, dateSorter } from '../../utils/date-formatter';
 
 import {
   Comment,
@@ -27,9 +27,9 @@ import { ORANGE } from '../../styles/constant';
 import { RateBookModal } from '../modals/rate-book/rate-book';
 
 export const Comments = () => {
-  const { bookById, pending, error } = useSelector((state: AppState) => state.bookById);
+  const { bookById, pending } = useSelector((state: AppState) => state.bookById);
   const [isOpen, setOpen] = useState(true);
-  const [isVisibleModal, setIsVisibleModal] = useState(true);
+  const [isVisible, setVisible] = useState(false);
 
   const { comments } = bookById;
 
@@ -37,8 +37,8 @@ export const Comments = () => {
     setOpen(!isOpen);
   };
 
-  const toggleModal = () => {
-    setIsVisibleModal(!isVisibleModal);
+  const handleChangeModal = (isVisible: boolean) => {
+    setVisible(isVisible);
   };
 
   return (
@@ -49,23 +49,25 @@ export const Comments = () => {
         {isOpen ? <Up /> : <Down />}
       </CommentsTitleWrapper>
       {!pending &&
-        Object.entries(comments).map((comment, index) => (
-          <Comment isOpen={isOpen} key={index}>
-            <UserInfo>
-              <UserImage source={require('../../assets/png/review.png')} />
-              <View>
-                <UserName>
-                  {comment[1].user.firstName} {comment[1].user.lastName}
-                </UserName>
-                <UserName>{dateFormatter(comment[1].createdAt)}</UserName>
-              </View>
-            </UserInfo>
-            <Rating amount={comment[1].rating} choice='' />
-            <CommentText>{comment[1].text}</CommentText>
-          </Comment>
-        ))}
-      <CardButton text='Оценить книгу' list='' choice='' bookpage='bookpage' onPress={toggleModal} />
-      {isVisibleModal && <RateBookModal visible={isVisibleModal} />}
+        Object.entries(comments)
+          .sort(dateSorter)
+          .map((comment, index) => (
+            <Comment isOpen={isOpen} key={index}>
+              <UserInfo>
+                <UserImage source={require('../../assets/png/review.png')} />
+                <View>
+                  <UserName>
+                    {comment[1].user.firstName} {comment[1].user.lastName}
+                  </UserName>
+                  <UserName>{dateFormatter(comment[1].createdAt)}</UserName>
+                </View>
+              </UserInfo>
+              <Rating amount={comment[1].rating} choice='' />
+              <CommentText>{comment[1].text}</CommentText>
+            </Comment>
+          ))}
+      <CardButton text='Оценить книгу' list='' choice='' bookpage='bookpage' onPress={() => setVisible(true)} />
+      {isVisible && <RateBookModal visible={handleChangeModal} />}
     </View>
   );
 };
