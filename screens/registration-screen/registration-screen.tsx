@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { View, Modal, Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
+import { CardButton } from '../../components/button/card-button';
 import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
 
 import { ORANGE } from '../../styles/constant';
@@ -16,7 +18,8 @@ import {
   InputsWrapper,
   RedHint,
 } from './styled-sregistration-screen';
-import { CardButton } from '../../components/button/card-button';
+
+type registrationDataType = { username: string; password: string; firstName: string; lastName: string };
 
 export const RegistrationScreen = () => {
   const {
@@ -32,15 +35,13 @@ export const RegistrationScreen = () => {
       password: '',
       firstName: '',
       lastName: '',
-      //   phone: '',
-      //   email: '',
     },
   });
-
+  const navigation = useNavigation();
   const [step, setStep] = useState(1);
   const [showSteps, toggleShowSteps] = useState(false);
 
-  const onSubmit = (userRegistrationData: any) => console.log(userRegistrationData);
+  const onSubmit = (userRegistrationData: registrationDataType) => console.log(userRegistrationData);
 
   const registrationStep = (step: number) => {
     switch (step) {
@@ -128,9 +129,6 @@ export const RegistrationScreen = () => {
             )}
           </>
         );
-
-      default:
-        break;
     }
   };
 
@@ -141,7 +139,7 @@ export const RegistrationScreen = () => {
         <EntranceStep>{step} шаг из 2</EntranceStep>
         <InputsWrapper>{registrationStep(step)}</InputsWrapper>
         <DownText>Есть учетная запись?</DownText>
-        <TouchableOpacity style={{ alignSelf: 'flex-start' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('AuthScreen')} style={{ alignSelf: 'flex-start' }}>
           <DownTextButton>Войти</DownTextButton>
         </TouchableOpacity>
       </StyledModalView>

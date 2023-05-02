@@ -3,8 +3,6 @@ import styled from 'styled-components/native';
 import { BLACK40, BLACK5, DARK } from './../../styles/constant';
 
 export const StyledModalView = styled.View`
-  /* height: 100%; */
-  /* flex: 1; */
   margin: 25px;
   padding: 30px 16px 32px;
   background-color: ${BLACK5};

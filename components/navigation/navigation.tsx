@@ -4,9 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StatusBar } from 'expo-status-bar';
 
+import { AuthScreen } from '../../screens/auth-screen/auth';
 import { BookScreen } from '../../screens/book-screen/book-screen';
 import { MainScreen } from '../../screens/main-screen/main-screen';
-import { RegistrationScreen } from '../../screens/registration/registration-screen';
+import { RegistrationScreen } from '../../screens/registration-screen/registration-screen';
 import { OfferScreen } from '../../screens/terms-offer-screen/offer-screen';
 import { TermsScreen } from '../../screens/terms-offer-screen/terms-screen';
 
@@ -51,12 +52,21 @@ export const Navigation = () => {
           }}
         >
           <Drawer.Screen
-            name='registration'
+            name='RegistrationScreen'
             component={RegistrationScreen}
             options={{
               drawerLabel: 'Регистрация',
               title: 'Cleverland',
-              // drawerItemStyle: { height: 0 },
+              drawerItemStyle: { height: 0 },
+            }}
+          />
+          <Drawer.Screen
+            name='AuthScreen'
+            component={AuthScreen}
+            options={{
+              drawerLabel: 'Авторизация',
+              title: 'Cleverland',
+              drawerItemStyle: { height: 0 },
             }}
           />
           <Drawer.Screen

@@ -11,7 +11,7 @@ export const StyledView = styled.View`
 
 export const EntranceTitle = styled(ModalTitle)`
   align-self: flex-start;
-  font-size: 30px;
+  font-size: 27px;
 `;
 
 export const EntranceStep = styled(RateText)`
