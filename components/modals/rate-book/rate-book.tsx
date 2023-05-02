@@ -8,7 +8,8 @@ import { Rating } from '../../stars/rating';
 
 import { ORANGE } from '../../../styles/constant';
 import { ModalTitle, StyledModalView } from '../styled-modal';
-import { RateText, RatingInput, TextInput } from './styled-rate-book';
+import { RateText, RatingInput, StyledModal, TextInput } from './styled-rate-book';
+import { StyledView } from '../../../screens/registration/styled-sregistration-screen';
 
 export const RateBookModal = ({ visible }: { visible: Function }) => {
   const [isVisible, setVisibility] = useState(false);
@@ -44,54 +45,56 @@ export const RateBookModal = ({ visible }: { visible: Function }) => {
 
   return (
     <Modal animationType='fade' transparent={true}>
-      <StyledModalView>
-        <TouchableOpacity
-          onPress={() => {
-            handleVisible();
-            setVisibility(false);
-          }}
-        >
-          <Cross width={35} height={35} />
-        </TouchableOpacity>
-        <ModalTitle>Оцените книгу</ModalTitle>
-        <RateText>Ваша оценка: </RateText>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-            max: 5,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <RatingInput
-              maxLength={1}
-              placeholder='Введите от 1 до 5'
-              cursorColor={ORANGE}
-              onBlur={onBlur}
-              inputMode='numeric'
-              value={value}
-              onChangeText={onChange}
-            />
-          )}
-          name='rating'
-        />
-        {errors.rating && <Text>Это обязательное поле с допустимыми значениями от 1 до 5</Text>}
-        <Rating amount={Number(getValues('rating'))} choice='bookscreen' />
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              multiline
-              placeholder='Оставить отзыв'
-              cursorColor={ORANGE}
-              onBlur={onBlur}
-              value={value}
-              onChangeText={onChange}
-            />
-          )}
-          name='text'
-        />
-        <CardButton text='Оценить' bookpage='bookpage' onPress={handleSubmit(onSubmit)} list='' choice='' />
-      </StyledModalView>
+      <StyledView>
+        <StyledModalView>
+          <TouchableOpacity
+            onPress={() => {
+              handleVisible();
+              setVisibility(false);
+            }}
+          >
+            <Cross width={35} height={35} />
+          </TouchableOpacity>
+          <ModalTitle>Оцените книгу</ModalTitle>
+          <RateText>Ваша оценка: </RateText>
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+              max: 5,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <RatingInput
+                maxLength={1}
+                placeholder='Введите от 1 до 5'
+                cursorColor={ORANGE}
+                onBlur={onBlur}
+                inputMode='numeric'
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+            name='rating'
+          />
+          {errors.rating && <Text>Это обязательное поле с допустимыми значениями от 1 до 5</Text>}
+          <Rating amount={Number(getValues('rating'))} choice='bookscreen' />
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                multiline
+                placeholder='Оставить отзыв'
+                cursorColor={ORANGE}
+                onBlur={onBlur}
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+            name='text'
+          />
+          <CardButton text='Оценить' bookpage='bookpage' onPress={handleSubmit(onSubmit)} list='' choice='' />
+        </StyledModalView>
+      </StyledView>
     </Modal>
   );
 };

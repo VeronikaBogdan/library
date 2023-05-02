@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { BookScreen } from '../../screens/book-screen/book-screen';
 import { MainScreen } from '../../screens/main-screen/main-screen';
+import { RegistrationScreen } from '../../screens/registration/registration-screen';
 import { OfferScreen } from '../../screens/terms-offer-screen/offer-screen';
 import { TermsScreen } from '../../screens/terms-offer-screen/terms-screen';
 
@@ -49,6 +50,15 @@ export const Navigation = () => {
             headerTitleStyle: { fontSize: 24 },
           }}
         >
+          <Drawer.Screen
+            name='registration'
+            component={RegistrationScreen}
+            options={{
+              drawerLabel: 'Регистрация',
+              title: 'Cleverland',
+              // drawerItemStyle: { height: 0 },
+            }}
+          />
           <Drawer.Screen
             name='AllBooks'
             component={MainScreen}

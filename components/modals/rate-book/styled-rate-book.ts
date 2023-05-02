@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { BLACK10, BLACK70, BLACK40, WHITE } from '../../../styles/constant';
+import { BLACK70, BLACK40, WHITE } from '../../../styles/constant';
 
 export const RateText = styled.Text`
   margin-top: 30px;
