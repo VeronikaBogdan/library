@@ -45,12 +45,22 @@ export const Navigation = () => {
       <StatusBar style='dark' backgroundColor={styles.WHITE} />
       <NavigationContainer>
         <Drawer.Navigator
+          initialRouteName='AuthScreen'
           screenOptions={{
             headerStyle: { backgroundColor: styles.BLACK5 },
             headerTintColor: styles.DARK,
             headerTitleStyle: { fontSize: 24 },
           }}
         >
+          <Drawer.Screen
+            name='AllBooks'
+            component={MainScreen}
+            options={{
+              drawerLabel: 'Все книги',
+              title: 'Библиотека / Все книги',
+              drawerActiveTintColor: styles.ORANGE,
+            }}
+          />
           <Drawer.Screen
             name='AuthScreen'
             component={AuthScreen}
@@ -69,15 +79,6 @@ export const Navigation = () => {
               title: 'Cleverland',
               drawerItemStyle: { height: 0 },
               headerShown: false,
-            }}
-          />
-          <Drawer.Screen
-            name='AllBooks'
-            component={MainScreen}
-            options={{
-              drawerLabel: 'Все книги',
-              title: 'Библиотека / Все книги',
-              drawerActiveTintColor: styles.ORANGE,
             }}
           />
           {isVisible &&
@@ -115,6 +116,14 @@ export const Navigation = () => {
             component={OfferScreen}
             options={{
               drawerLabel: 'Оффер',
+              title: 'Библиотека',
+            }}
+          />
+          <Drawer.Screen
+            name='exit'
+            component={TermsScreen}
+            options={{
+              drawerLabel: 'Выход',
               title: 'Библиотека',
             }}
           />

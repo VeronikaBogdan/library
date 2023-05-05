@@ -22,6 +22,7 @@ import {
   AppTitle,
 } from '../registration-screen/styled-sregistration-screen';
 import { AuthMessage } from '../../components/modals/auth-message/auth-message';
+import { useEffect } from 'react';
 
 type authDataType = { username: string; password: string };
 
@@ -40,10 +41,13 @@ export const AuthScreen = () => {
 
   const onSubmit = (userAuthData: authDataType) => {
     dispatch(signInRequest(userAuthData));
-    token && navigation.navigate('AllBooks');
   };
 
   const { pending, error, statusError, token } = useSelector((state: AppState) => state.signIn);
+
+  useEffect(() => {
+    if (token) navigation.navigate('AllBooks');
+  }, [token]);
 
   return (
     <StyledView>

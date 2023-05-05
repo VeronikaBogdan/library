@@ -24,6 +24,7 @@ export function* signInSaga(action: any) {
       yield put(signInSuccess(token));
     } else {
       yield put(signInFailure('400'));
+      yield put(signInSuccess(''));
     }
   } catch (error) {
     yield put(signInFailure('error'));
