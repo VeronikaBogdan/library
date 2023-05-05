@@ -1,6 +1,7 @@
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
+import { AntDesign } from '@expo/vector-icons';
 
 import { ORANGE } from '../../styles/constant';
 import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
@@ -14,6 +15,7 @@ import {
   StyledView,
   InputsWrapper,
   RedHint,
+  AppTitle,
 } from '../registration-screen/styled-sregistration-screen';
 
 type authDataType = { username: string; password: string };
@@ -38,6 +40,7 @@ export const AuthScreen = () => {
 
   return (
     <StyledView>
+      <AppTitle>Library</AppTitle>
       <StyledModalView>
         <EntranceTitle>Вход в личный кабинет</EntranceTitle>
         <InputsWrapper>
@@ -68,7 +71,9 @@ export const AuthScreen = () => {
         </InputsWrapper>
         <DownText>Нет учётной записи?</DownText>
         <TouchableOpacity onPress={() => navigation.navigate('RegistrationScreen')} style={{ alignSelf: 'flex-start' }}>
-          <DownTextButton>Регистрация</DownTextButton>
+          <DownTextButton>
+            Регистрация <AntDesign name='arrowright' size={24} color='black' />
+          </DownTextButton>
         </TouchableOpacity>
       </StyledModalView>
     </StyledView>

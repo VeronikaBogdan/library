@@ -1,11 +1,17 @@
-import { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { CardButton } from '../../components/button/card-button';
-import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
 
+import { signUpRequest } from '../../store/registration/actions';
+import { SignUpUserData } from '../../store/registration/types';
+import { AppState } from '../../store/rootReducer';
+
+import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
 import { ORANGE } from '../../styles/constant';
 import { StyledModalView } from '../../components/modals/styled-modal';
 import {
@@ -17,9 +23,16 @@ import {
   StyledView,
   InputsWrapper,
   RedHint,
+  AppTitle,
 } from './styled-sregistration-screen';
+import { AuthMessage } from '../../components/modals/auth-message/auth-message';
 
-type registrationDataType = { username: string; password: string; firstName: string; lastName: string };
+type RegistrationType = {
+  firstName: string;
+  lastName: string;
+  password: string;
+  username: string;
+};
 
 export const RegistrationScreen = () => {
   const {
@@ -35,13 +48,23 @@ export const RegistrationScreen = () => {
       password: '',
       firstName: '',
       lastName: '',
+      token: Math.random().toString(36),
     },
   });
   const navigation = useNavigation();
   const [step, setStep] = useState(1);
   const [showSteps, toggleShowSteps] = useState(false);
+  const [isMessage, toggleIsMessage] = useState(false);
+  const dispatch = useDispatch();
 
-  const onSubmit = (userRegistrationData: registrationDataType) => console.log(userRegistrationData);
+  const onSubmit = (userRegistrationData: RegistrationType) => {
+    dispatch(signUpRequest({ ...userRegistrationData, token: Math.random().toString(36) }));
+    if (!isMessage) toggleIsMessage(!isMessage);
+    console.log(userRegistrationData);
+  };
+
+  const { pending, error, statusError, status } = useSelector((state: AppState) => state.signUp);
+  console.log(statusError);
 
   const registrationStep = (step: number) => {
     switch (step) {
@@ -77,6 +100,8 @@ export const RegistrationScreen = () => {
                   onBlur={onBlur}
                   value={value}
                   onChangeText={onChange}
+                  textContentType={'password'}
+                  secureTextEntry
                 />
               )}
               name='password'
@@ -134,15 +159,65 @@ export const RegistrationScreen = () => {
 
   return (
     <StyledView>
-      <StyledModalView>
-        <EntranceTitle>Регистрация</EntranceTitle>
-        <EntranceStep>{step} шаг из 2</EntranceStep>
-        <InputsWrapper>{registrationStep(step)}</InputsWrapper>
-        <DownText>Есть учетная запись?</DownText>
-        <TouchableOpacity onPress={() => navigation.navigate('AuthScreen')} style={{ alignSelf: 'flex-start' }}>
-          <DownTextButton>Войти</DownTextButton>
-        </TouchableOpacity>
-      </StyledModalView>
+      <AppTitle>Library</AppTitle>
+      {step === 1 && !isMessage ? (
+        <StyledModalView>
+          <EntranceTitle>Регистрация</EntranceTitle>
+          <EntranceStep>{step} шаг из 2</EntranceStep>
+          <InputsWrapper>{registrationStep(step)}</InputsWrapper>
+          <DownText>Есть учетная запись?</DownText>
+          <TouchableOpacity onPress={() => navigation.navigate('AuthScreen')} style={{ alignSelf: 'flex-start' }}>
+            <DownTextButton>
+              Войти <AntDesign name='arrowright' size={24} color='black' />
+            </DownTextButton>
+          </TouchableOpacity>
+        </StyledModalView>
+      ) : statusError === '400' && isMessage ? (
+        <AuthMessage
+          title='Данные не сохранились'
+          message='Такой логин или e-mail уже записан в системе. Попробуйте зарегистрироваться по другому логину или e-mail.'
+          buttonValue='назад к регистрации'
+          onPress={() => {
+            setStep(1);
+            navigation.navigate('RegistrationScreen');
+            toggleShowSteps(true);
+            toggleIsMessage(!isMessage);
+            reset();
+          }}
+        />
+      ) : !!statusError && isMessage ? (
+        <AuthMessage
+          title='Данные не сохранились'
+          message='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз'
+          buttonValue='повторить'
+          onPress={handleSubmit(onSubmit)}
+        />
+      ) : !!status && isMessage ? (
+        <AuthMessage
+          title='Регистрация успешна'
+          message='Регистрация прошла успешно. Зайдите в личный кабинет, используя свои логин и пароль'
+          buttonValue='вход'
+          onPress={() => {
+            navigation.navigate('AuthScreen');
+            setStep(1);
+            toggleShowSteps(true);
+            toggleIsMessage(!isMessage);
+            reset();
+          }}
+        />
+      ) : (
+        <StyledModalView>
+          <EntranceTitle>Регистрация</EntranceTitle>
+          <EntranceStep>{step} шаг из 2</EntranceStep>
+          <InputsWrapper>{registrationStep(step)}</InputsWrapper>
+          <DownText>Есть учетная запись?</DownText>
+          <TouchableOpacity onPress={() => navigation.navigate('AuthScreen')} style={{ alignSelf: 'flex-start' }}>
+            <DownTextButton>
+              Войти <AntDesign name='arrowright' size={24} color='black' />
+            </DownTextButton>
+          </TouchableOpacity>
+        </StyledModalView>
+      )}
     </StyledView>
   );
 };

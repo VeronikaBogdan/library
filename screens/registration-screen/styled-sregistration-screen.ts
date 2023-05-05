@@ -9,6 +9,14 @@ export const StyledView = styled.View`
   justify-content: center;
 `;
 
+export const AppTitle = styled.Text`
+  align-self: center;
+  font-weight: 600;
+  font-size: 35px;
+  letter-spacing: 1px;
+  color: ${WHITE};
+`;
+
 export const EntranceTitle = styled(ModalTitle)`
   align-self: flex-start;
   font-size: 27px;

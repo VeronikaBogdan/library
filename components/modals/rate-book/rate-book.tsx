@@ -8,7 +8,7 @@ import { Rating } from '../../stars/rating';
 
 import { ORANGE } from '../../../styles/constant';
 import { ModalTitle, StyledModalView } from '../styled-modal';
-import { RateText, RatingInput, StyledModal, TextInput } from './styled-rate-book';
+import { RateText, RatingInput, TextInput } from './styled-rate-book';
 import { StyledView } from '../../../screens/registration-screen/styled-sregistration-screen';
 
 export const RateBookModal = ({ visible }: { visible: Function }) => {

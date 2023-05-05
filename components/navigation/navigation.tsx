@@ -42,7 +42,7 @@ export const Navigation = () => {
 
   return (
     <>
-      <StatusBar style='dark' />
+      <StatusBar style='dark' backgroundColor={styles.WHITE} />
       <NavigationContainer>
         <Drawer.Navigator
           screenOptions={{
@@ -52,21 +52,23 @@ export const Navigation = () => {
           }}
         >
           <Drawer.Screen
-            name='RegistrationScreen'
-            component={RegistrationScreen}
-            options={{
-              drawerLabel: 'Регистрация',
-              title: 'Cleverland',
-              drawerItemStyle: { height: 0 },
-            }}
-          />
-          <Drawer.Screen
             name='AuthScreen'
             component={AuthScreen}
             options={{
               drawerLabel: 'Авторизация',
               title: 'Cleverland',
               drawerItemStyle: { height: 0 },
+              headerShown: false,
+            }}
+          />
+          <Drawer.Screen
+            name='RegistrationScreen'
+            component={RegistrationScreen}
+            options={{
+              drawerLabel: 'Регистрация',
+              title: 'Cleverland',
+              drawerItemStyle: { height: 0 },
+              headerShown: false,
             }}
           />
           <Drawer.Screen
