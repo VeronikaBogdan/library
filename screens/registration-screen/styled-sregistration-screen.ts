@@ -56,10 +56,12 @@ export const CommonInput = styled.TextInput`
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  border-color: ${BLACK40};
+  border-color: ${({ error }) => (error ? ACCENT : BLACK40)};
+  /* border-color: ${BLACK40}; */
   border-bottom-width: 1px;
   margin-top: 15px;
   margin-vertical: 10px;
+  padding-left: 5px;
 `;
 
 export const RedHint = styled.Text`

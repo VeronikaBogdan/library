@@ -1,5 +1,4 @@
 import { StyledModalView } from '../styled-modal';
-import { EntranceTitle } from '../../../screens/registration-screen/styled-sregistration-screen';
 import { AssessScreenButton, StyledTextBook } from '../../button/styled-card-button';
 import { MessageTitle, MessageText } from './styled-auth-message';
 

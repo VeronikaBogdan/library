@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 
 import { CardButton } from '../../components/button/card-button';
+import { AuthMessage } from '../../components/modals/auth-message/auth-message';
+import { Loader } from '../../components/loader/loader';
 
 import { signUpRequest } from '../../store/registration/actions';
-import { SignUpUserData } from '../../store/registration/types';
 import { AppState } from '../../store/rootReducer';
 
 import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
@@ -25,14 +26,8 @@ import {
   RedHint,
   AppTitle,
 } from './styled-sregistration-screen';
-import { AuthMessage } from '../../components/modals/auth-message/auth-message';
 
-type RegistrationType = {
-  firstName: string;
-  lastName: string;
-  password: string;
-  username: string;
-};
+type RegistrationType = { firstName: string; lastName: string; password: string; username: string };
 
 export const RegistrationScreen = () => {
   const {
@@ -51,20 +46,18 @@ export const RegistrationScreen = () => {
       token: Math.random().toString(36),
     },
   });
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [step, setStep] = useState(1);
   const [showSteps, toggleShowSteps] = useState(false);
   const [isMessage, toggleIsMessage] = useState(false);
-  const dispatch = useDispatch();
 
   const onSubmit = (userRegistrationData: RegistrationType) => {
     dispatch(signUpRequest({ ...userRegistrationData, token: Math.random().toString(36) }));
     if (!isMessage) toggleIsMessage(!isMessage);
-    console.log(userRegistrationData);
   };
 
   const { pending, error, statusError, status } = useSelector((state: AppState) => state.signUp);
-  console.log(statusError);
 
   const registrationStep = (step: number) => {
     switch (step) {
@@ -83,15 +76,17 @@ export const RegistrationScreen = () => {
                   onBlur={onBlur}
                   value={value}
                   onChangeText={onChange}
+                  error={errors.username}
                 />
               )}
               name='username'
             />
-            {errors.username && <RedHint>Используйте для логина латинский алфавит и цифры</RedHint>}
+            {errors.username && <RedHint>Поле не может быть пустым</RedHint>}
             <Controller
               control={control}
               rules={{
                 required: true,
+                minLength: 8,
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <CommonInput
@@ -102,11 +97,12 @@ export const RegistrationScreen = () => {
                   onChangeText={onChange}
                   textContentType={'password'}
                   secureTextEntry
+                  error={errors.password}
                 />
               )}
               name='password'
             />
-            {errors.password && <RedHint>Пароль не менее 8 символов, с заглавной буквой и цифрой</RedHint>}
+            {errors.password && <RedHint>Пароль содержит не менее 8 символов</RedHint>}
             {isValid ? (
               <AssessScreenButton
                 onPress={() => {
@@ -129,7 +125,13 @@ export const RegistrationScreen = () => {
                 required: true,
               }}
               render={({ field: { onChange, onBlur } }) => (
-                <CommonInput placeholder='Имя' cursorColor={ORANGE} onBlur={onBlur} onChangeText={onChange} />
+                <CommonInput
+                  placeholder='Имя'
+                  cursorColor={ORANGE}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  error={errors.firstName}
+                />
               )}
               name='firstName'
             />
@@ -140,7 +142,13 @@ export const RegistrationScreen = () => {
                 required: true,
               }}
               render={({ field: { onChange, onBlur } }) => (
-                <CommonInput placeholder='Фамилия' cursorColor={ORANGE} onBlur={onBlur} onChangeText={onChange} />
+                <CommonInput
+                  placeholder='Фамилия'
+                  cursorColor={ORANGE}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  error={errors.lastName}
+                />
               )}
               name='lastName'
             />
@@ -159,8 +167,9 @@ export const RegistrationScreen = () => {
 
   return (
     <StyledView>
+      {/* {isSubmitted && !status && pending && <Loader />} */}
       <AppTitle>Library</AppTitle>
-      {step === 1 && !isMessage ? (
+      {!isMessage ? (
         <StyledModalView>
           <EntranceTitle>Регистрация</EntranceTitle>
           <EntranceStep>{step} шаг из 2</EntranceStep>
@@ -172,7 +181,7 @@ export const RegistrationScreen = () => {
             </DownTextButton>
           </TouchableOpacity>
         </StyledModalView>
-      ) : statusError === '400' && isMessage ? (
+      ) : statusError === '400' ? (
         <AuthMessage
           title='Данные не сохранились'
           message='Такой логин или e-mail уже записан в системе. Попробуйте зарегистрироваться по другому логину или e-mail.'
@@ -185,14 +194,14 @@ export const RegistrationScreen = () => {
             reset();
           }}
         />
-      ) : !!statusError && isMessage ? (
+      ) : !!statusError ? (
         <AuthMessage
           title='Данные не сохранились'
           message='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз'
           buttonValue='повторить'
           onPress={handleSubmit(onSubmit)}
         />
-      ) : !!status && isMessage ? (
+      ) : !!status ? (
         <AuthMessage
           title='Регистрация успешна'
           message='Регистрация прошла успешно. Зайдите в личный кабинет, используя свои логин и пароль'

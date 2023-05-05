@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StatusBar } from 'expo-status-bar';
 
-import { AuthScreen } from '../../screens/auth-screen/auth';
+import { AuthScreen } from '../../screens/auth-screen/auth-screen';
 import { BookScreen } from '../../screens/book-screen/book-screen';
 import { MainScreen } from '../../screens/main-screen/main-screen';
 import { RegistrationScreen } from '../../screens/registration-screen/registration-screen';
