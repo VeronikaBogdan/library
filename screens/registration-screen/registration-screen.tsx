@@ -27,7 +27,14 @@ import {
   AppTitle,
 } from './styled-sregistration-screen';
 
-type RegistrationType = { firstName: string; lastName: string; password: string; username: string };
+type RegistrationType = {
+  firstName: string;
+  lastName: string;
+  password: string;
+  username: string;
+  email: string;
+  phone: string;
+};
 
 export const RegistrationScreen = () => {
   const {
@@ -43,7 +50,8 @@ export const RegistrationScreen = () => {
       password: '',
       firstName: '',
       lastName: '',
-      token: Math.random().toString(36),
+      email: '',
+      phone: '',
     },
   });
   const dispatch = useDispatch();
@@ -53,7 +61,7 @@ export const RegistrationScreen = () => {
   const [isMessage, toggleIsMessage] = useState(false);
 
   const onSubmit = (userRegistrationData: RegistrationType) => {
-    dispatch(signUpRequest({ ...userRegistrationData, token: Math.random().toString(36) }));
+    dispatch(signUpRequest(userRegistrationData));
     if (!isMessage) toggleIsMessage(!isMessage);
   };
 
@@ -68,6 +76,12 @@ export const RegistrationScreen = () => {
               control={control}
               rules={{
                 required: true,
+                validate: {
+                  hasLatinLettersAndNumbers: (username) =>
+                    /[A-z0-9]+/.test(username) || 'Используйте для логина латинский алфавит и цифры',
+                  hasNumbers: (username) => /[0-9]+/g.test(username) || 'цифры',
+                  hasLatinLetters: (username) => /[A-z]+/g.test(username) || 'латинский алфавит',
+                },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <CommonInput
@@ -81,12 +95,16 @@ export const RegistrationScreen = () => {
               )}
               name='username'
             />
-            {errors.username && <RedHint>Поле не может быть пустым</RedHint>}
+            {errors.username && <RedHint>Используйте для логина латинский алфавит и цифры</RedHint>}
             <Controller
               control={control}
               rules={{
                 required: true,
-                minLength: 8,
+                validate: {
+                  hasCapitalLetter: (password) => /[A-Z]+/.test(password) || 'заглавной буквой',
+                  hasDigits: (password) => /[0-9]+/.test(password) || 'цифрой',
+                  hasGreaterThanOrEqualEightCharacters: (password) => password.length >= 8 || 'не менее 8 символов',
+                },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <CommonInput
@@ -102,7 +120,7 @@ export const RegistrationScreen = () => {
               )}
               name='password'
             />
-            {errors.password && <RedHint>Пароль содержит не менее 8 символов</RedHint>}
+            {errors.password && <RedHint>Пароль не менее 8 символов, с заглавной буквой и цифрой</RedHint>}
             {isValid ? (
               <AssessScreenButton
                 onPress={() => {
@@ -154,6 +172,61 @@ export const RegistrationScreen = () => {
             />
             {errors.lastName && <RedHint>Поле не может быть пустым</RedHint>}
             {isValid ? (
+              <AssessScreenButton
+                onPress={() => {
+                  setStep(3);
+                }}
+              >
+                <StyledTextBook>Последний шаг</StyledTextBook>
+              </AssessScreenButton>
+            ) : (
+              <CardButton text='Последний шаг' choice='' bookpage='' list='' onPress={() => {}} />
+            )}
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur } }) => (
+                <CommonInput
+                  placeholder='Номер телефона'
+                  cursorColor={ORANGE}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  error={errors.phone}
+                  keyboardType='numeric'
+                />
+              )}
+              name='phone'
+            />
+            {errors.phone && <RedHint>Поле не может быть пустым</RedHint>}
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  message: 'Введите корректный e-mail',
+                },
+              }}
+              render={({ field: { onChange, onBlur } }) => (
+                <CommonInput
+                  placeholder='E-mail'
+                  cursorColor={ORANGE}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  error={errors.email}
+                />
+              )}
+              name='email'
+            />
+            {errors.email && <RedHint>Поле не может быть пустым</RedHint>}
+            {isValid ? (
               <AssessScreenButton onPress={handleSubmit(onSubmit)}>
                 <StyledTextBook>Зарегистрироваться</StyledTextBook>
               </AssessScreenButton>
@@ -172,7 +245,7 @@ export const RegistrationScreen = () => {
       {!isMessage ? (
         <StyledModalView>
           <EntranceTitle>Регистрация</EntranceTitle>
-          <EntranceStep>{step} шаг из 2</EntranceStep>
+          <EntranceStep>{step} шаг из 3</EntranceStep>
           <InputsWrapper>{registrationStep(step)}</InputsWrapper>
           <DownText>Есть учетная запись?</DownText>
           <TouchableOpacity onPress={() => navigation.navigate('AuthScreen')} style={{ alignSelf: 'flex-start' }}>
@@ -181,7 +254,7 @@ export const RegistrationScreen = () => {
             </DownTextButton>
           </TouchableOpacity>
         </StyledModalView>
-      ) : statusError === '400' ? (
+      ) : statusError === 400 ? (
         <AuthMessage
           title='Данные не сохранились'
           message='Такой логин или e-mail уже записан в системе. Попробуйте зарегистрироваться по другому логину или e-mail.'

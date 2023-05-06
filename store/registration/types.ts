@@ -5,7 +5,9 @@ export interface SignUpUserData {
   lastName: string;
   password: string;
   username: string;
-  token: string;
+  // token: string;
+  email: string;
+  phone: string;
 }
 
 export interface SignUpState {

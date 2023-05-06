@@ -1,15 +1,20 @@
+import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { signInRequest } from '../../store/auth/actions';
 import { AppState } from '../../store/rootReducer';
+import { SignInUserData } from '../../store/auth/types';
 
 import { ORANGE } from '../../styles/constant';
+import { Loader } from '../../components/loader/loader';
 import { AssessScreenButton, StyledTextBook } from '../../components/button/styled-card-button';
 import { StyledModalView } from '../../components/modals/styled-modal';
+import { AuthMessage } from '../../components/modals/auth-message/auth-message';
 
 import {
   CommonInput,
@@ -21,26 +26,26 @@ import {
   RedHint,
   AppTitle,
 } from '../registration-screen/styled-sregistration-screen';
-import { AuthMessage } from '../../components/modals/auth-message/auth-message';
-import { useEffect } from 'react';
 
-type authDataType = { username: string; password: string };
+type authDataType = { identifier: string; password: string };
 
 export const AuthScreen = () => {
   const {
     control,
     formState: { errors, isValid, isSubmitted },
     handleSubmit,
+    reset,
   } = useForm({
     criteriaMode: 'all',
     mode: 'all',
-    defaultValues: { username: '', password: '' },
+    defaultValues: { identifier: '', password: '' },
   });
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onSubmit = (userAuthData: authDataType) => {
+  const onSubmit = (userAuthData: SignInUserData) => {
     dispatch(signInRequest(userAuthData));
+    reset();
   };
 
   const { pending, error, statusError, token } = useSelector((state: AppState) => state.signIn);
@@ -49,10 +54,12 @@ export const AuthScreen = () => {
     if (token) navigation.navigate('AllBooks');
   }, [token]);
 
-  return (
+  return pending ? (
+    <Loader />
+  ) : (
     <StyledView>
       <AppTitle>Library</AppTitle>
-      {!!statusError && statusError !== '400' ? (
+      {!!statusError && statusError !== 400 ? (
         <AuthMessage
           title='Вход не выполнен'
           message='Что-то пошло не так. Попробуйте ещё раз'
@@ -67,6 +74,12 @@ export const AuthScreen = () => {
               control={control}
               rules={{
                 required: true,
+                validate: {
+                  hasLatinLettersAndNumbers: (username) =>
+                    /[A-z0-9]+/.test(username) || 'Используйте для логина латинский алфавит и цифры',
+                  hasNumbers: (username) => /[0-9]+/g.test(username) || 'цифры',
+                  hasLatinLetters: (username) => /[A-z]+/g.test(username) || 'латинский алфавит',
+                },
               }}
               render={({ field: { onChange, onBlur } }) => (
                 <CommonInput
@@ -74,16 +87,21 @@ export const AuthScreen = () => {
                   cursorColor={ORANGE}
                   onBlur={onBlur}
                   onChangeText={onChange}
-                  error={errors.username}
+                  textContentType='username'
+                  error={errors.identifier}
                 />
               )}
-              name='username'
+              name='identifier'
             />
             <Controller
               control={control}
               rules={{
                 required: true,
-                minLength: 8,
+                validate: {
+                  hasCapitalLetter: (password) => /[A-Z]+/.test(password) || 'заглавной буквой',
+                  hasDigits: (password) => /[0-9]+/.test(password) || 'цифрой',
+                  hasGreaterThanOrEqualEightCharacters: (password) => password.length >= 8 || 'не менее 8 символов',
+                },
               }}
               render={({ field: { onChange, onBlur } }) => (
                 <CommonInput
@@ -91,14 +109,14 @@ export const AuthScreen = () => {
                   cursorColor={ORANGE}
                   onBlur={onBlur}
                   onChangeText={onChange}
-                  textContentType={'password'}
+                  textContentType='password'
                   secureTextEntry
                   error={errors.password}
                 />
               )}
               name='password'
             />
-            {(statusError === '400' || (isSubmitted && !isValid)) && <RedHint>Неверный логин или пароль!</RedHint>}
+            {((isSubmitted && !isValid) || statusError === 400) && <RedHint>Неверный логин или пароль!</RedHint>}
             <AssessScreenButton onPress={handleSubmit(onSubmit)}>
               <StyledTextBook>Вход</StyledTextBook>
             </AssessScreenButton>

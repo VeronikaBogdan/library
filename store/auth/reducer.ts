@@ -4,9 +4,9 @@ import { SignInActions, SignInState } from './types';
 
 const initialState: SignInState = {
   token: '',
-  pending: true,
+  pending: false,
   error: false,
-  statusError: '',
+  statusError: 0,
 };
 
 export default (state = initialState, action: SignInActions) => {

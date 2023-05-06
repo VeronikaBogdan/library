@@ -10,6 +10,7 @@ import { MainScreen } from '../../screens/main-screen/main-screen';
 import { RegistrationScreen } from '../../screens/registration-screen/registration-screen';
 import { OfferScreen } from '../../screens/terms-offer-screen/offer-screen';
 import { TermsScreen } from '../../screens/terms-offer-screen/terms-screen';
+import { ExitScreen } from '../../screens/exit-screen/exit-screen';
 
 import { categoriesRequest } from '../../store/categories/actions';
 import { booksRequest } from '../../store/books/actions';
@@ -121,7 +122,7 @@ export const Navigation = () => {
           />
           <Drawer.Screen
             name='exit'
-            component={TermsScreen}
+            component={ExitScreen}
             options={{
               drawerLabel: 'Выход',
               title: 'Библиотека',

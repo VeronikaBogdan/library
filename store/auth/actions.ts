@@ -14,7 +14,7 @@ export const signInSuccess = (token: string): SignInSuccess => ({
   token,
 });
 
-export const signInFailure = (error: string): SignInFailure => ({
+export const signInFailure = (error: number): SignInFailure => ({
   type: SIGNIN_FAILURE,
   error,
 });

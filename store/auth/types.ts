@@ -1,15 +1,15 @@
 import { SIGNIN_FAILURE, SIGNIN_REQUEST, SIGNIN_SUCCESS } from './actions';
 
 export interface SignInUserData {
+  identifier: string;
   password: string;
-  username: string;
 }
 
 export interface SignInState {
   pending: boolean;
   token: string;
   error: boolean;
-  statusError: string;
+  statusError: number;
 }
 
 export interface SignInRequest {

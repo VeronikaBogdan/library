@@ -3,7 +3,7 @@ import { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from './actions';
 import { SignUpUserData, SignUpActions, SignUpState } from './types';
 
 const initialState: SignUpState = {
-  pending: true,
+  pending: false,
   status: '',
   error: false,
   statusError: '',
