@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import MaskInput from 'react-native-mask-input';
 import { ORANGE, WHITE, BLACK40, BLACK70, BLACK10, DARK, ACCENT } from '../../styles/constant';
 import { ModalTitle } from '../../components/modals/styled-modal';
 import { RateText } from '../../components/modals/rate-book/styled-rate-book';
@@ -50,6 +51,21 @@ export const DownTextButton = styled.Text`
 `;
 
 export const CommonInput = styled.TextInput`
+  height: 50px;
+  background-color: ${BLACK10};
+  color: ${DARK};
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  border-color: ${({ error }) => (error ? ACCENT : BLACK40)};
+  /* border-color: ${BLACK40}; */
+  border-bottom-width: 1px;
+  margin-top: 15px;
+  margin-vertical: 10px;
+  padding-left: 5px;
+`;
+
+export const StyledMaskedInput = styled(MaskInput)`
   height: 50px;
   background-color: ${BLACK10};
   color: ${DARK};

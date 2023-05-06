@@ -1,6 +1,6 @@
-export const HOST = 'https://library-1-d844e-default-rtdb.firebaseio.com';
+// export const HOST = 'https://library-1-d844e-default-rtdb.firebaseio.com';
 export const IMAGE_HOST = 'https://raw.githubusercontent.com/VeronikaBogdan/my-api/master/library/covers/';
-// export const HOST = 'https://strapi.cleverland.by';
+export const HOST = 'https://library-cleverland-2jfze.ondigitalocean.app';
 export const ALL_BOOKS = 'AllBooks';
 export const ASCENDING = 'ascending';
 export const DESCENDING = 'descending';

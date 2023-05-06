@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SyncStorage from 'sync-storage';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { HOST } from '../../app-constants';
@@ -11,25 +11,18 @@ import { getData, storeData } from '../../utils/token';
 // export const getAllAuthUsers = () => axios.get(`${HOST}/auth.json`);
 
 export const instance = axios.create({
-  baseURL: 'https://library-cleverland-2jfze.ondigitalocean.app/api/auth',
+  baseURL: `${HOST}/api/auth`,
 });
 
-// instance.interceptors.response.use(
-//   (res) => {
-//     console.log('res: ', res.data.jwt);
-//     storeData(res.data.jwt);
-
-//     console.log('get', getData());
-//     // getData();
-//     // AsyncStorage.setItem('@jwtToken', res.data.jwt);
-//     // console.log(AsyncStorage.getItem('@jwtToken'));
-//     // window.localStorage.setItem('jwtToken', res.data.jwt);
-//     return res;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+instance.interceptors.response.use(
+  (res) => {
+    SyncStorage.set('jwtToken', res.data.jwt);
+    return res;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const signIn = (signInUserData: SignInUserData) => instance.post('/local', signInUserData);
 

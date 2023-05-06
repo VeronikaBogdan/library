@@ -48,6 +48,7 @@
     "react-hook-form": "^7.43.9",
     "react-native": "0.71.4",
     "react-native-gesture-handler": "^2.9.0",
+    "react-native-mask-input": "^1.2.3",
     "react-native-reanimated": "~2.14.4",
     "react-native-restart": "^0.0.27",
     "react-native-safe-area-context": "^4.5.0",
@@ -62,7 +63,8 @@
     "styled-normalize": "^8.0.7",
     "stylelint": "^15.3.0",
     "stylelint-config-standard": "^31.0.0",
-    "stylelint-prettier": "^3.0.0"
+    "stylelint-prettier": "^3.0.0",
+    "sync-storage": "^0.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

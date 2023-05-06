@@ -25,6 +25,7 @@ import {
   InputsWrapper,
   RedHint,
   AppTitle,
+  StyledMaskedInput,
 } from './styled-sregistration-screen';
 
 type RegistrationType = {
@@ -62,6 +63,8 @@ export const RegistrationScreen = () => {
 
   const onSubmit = (userRegistrationData: RegistrationType) => {
     dispatch(signUpRequest(userRegistrationData));
+    console.log(userRegistrationData);
+
     if (!isMessage) toggleIsMessage(!isMessage);
   };
 
@@ -192,11 +195,33 @@ export const RegistrationScreen = () => {
               rules={{
                 required: true,
               }}
-              render={({ field: { onChange, onBlur } }) => (
-                <CommonInput
+              render={({ field: { onChange, onBlur, value } }) => (
+                <StyledMaskedInput
+                  mask={[
+                    '+',
+                    '3',
+                    '7',
+                    '5',
+                    ' ',
+                    '(',
+                    /2|3|4/,
+                    /3|4|5|9/,
+                    ')',
+                    ' ',
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    '-',
+                    /\d/,
+                    /\d/,
+                    '-',
+                    /\d/,
+                    /\d/,
+                  ]}
                   placeholder='Номер телефона'
                   cursorColor={ORANGE}
                   onBlur={onBlur}
+                  value={value}
                   onChangeText={onChange}
                   error={errors.phone}
                   keyboardType='numeric'
