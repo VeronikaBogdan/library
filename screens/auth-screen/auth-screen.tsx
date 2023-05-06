@@ -4,9 +4,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import SyncStorage from 'sync-storage';
 
 import { signInRequest } from '../../store/auth/actions';
+import { categoriesRequest } from '../../store/categories/actions';
+import { booksRequest } from '../../store/books/actions';
 import { AppState } from '../../store/rootReducer';
 import { SignInUserData } from '../../store/auth/types';
 
@@ -51,8 +53,12 @@ export const AuthScreen = () => {
   const { pending, error, statusError, token } = useSelector((state: AppState) => state.signIn);
 
   useEffect(() => {
-    if (token) navigation.navigate('AllBooks');
-  }, [token]);
+    if (token && SyncStorage.get('jwtToken')) {
+      navigation.navigate('AllBooks');
+      dispatch(categoriesRequest());
+      dispatch(booksRequest());
+    }
+  }, [token, SyncStorage.get('jwtToken')]);
 
   return pending ? (
     <Loader />

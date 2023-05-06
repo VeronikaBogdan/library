@@ -16,7 +16,7 @@ import { Author, HighlightTitle, StyledCard } from './styled-card-grid';
 type CardGridProps = {
   id: number;
   category: string;
-  image: number;
+  image: string;
   rating: number | null;
   title: string;
   authors: string[] | null;

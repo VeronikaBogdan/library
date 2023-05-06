@@ -16,7 +16,7 @@ import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-li
 type CardListProps = {
   id: number;
   category: string;
-  image: number;
+  image: string;
   rating: number | null;
   title: string;
   authors: string[] | null;

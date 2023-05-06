@@ -31,7 +31,7 @@ export interface BookById {
   ISBN: string | null;
   producer: string | null;
   authors: string[] | null;
-  images: Image | null;
+  images: Image[] | null;
   categories: string[] | null;
   comments: Comment[] | null;
   booking: Booking | null;

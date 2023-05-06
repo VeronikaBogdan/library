@@ -4,7 +4,7 @@ import IconCat from '../../assets/svg/icon-cat.svg';
 import { Image, ImageLarge, ImageList, NoImage, NoImageLarge, NoImageList } from './styled-book-image';
 
 type BookImageProps = {
-  image: number;
+  image: string;
   choice: string;
   bookpage: number;
 };
@@ -22,13 +22,13 @@ export const BookImage = ({ image, choice, bookpage }: BookImageProps) => {
         <IconCat width={35} height={35} />
       </NoImageList>
     );
-  if (image && choice === LIST) return <ImageList source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
+  if (image && choice === LIST) return <ImageList source={{ uri: image }} />;
   if (!bookpage && choice === BOOKPAGE)
     return (
       <NoImageLarge>
         <IconCat />
       </NoImageLarge>
     );
-  if (bookpage && choice === BOOKPAGE) return <ImageLarge source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
-  return <Image source={{ uri: `${IMAGE_HOST}${image}.webp` }} />;
+  if (bookpage && choice === BOOKPAGE) return <ImageLarge source={{ uri: image }} />;
+  return <Image source={{ uri: image }} />;
 };
