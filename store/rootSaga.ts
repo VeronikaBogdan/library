@@ -5,6 +5,7 @@ import { watcherSagaForBooks } from './books/saga';
 import { watcherSagaForBookById } from './bookById/saga';
 import { watcherSagaForSignUp } from './registration/saga';
 import { watcherSagaForSignIn } from './auth/saga';
+import { watcherSagaForComment } from './comments/saga';
 
 export function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export function* rootSaga() {
     fork(watcherSagaForBookById),
     fork(watcherSagaForSignUp),
     fork(watcherSagaForSignIn),
+    fork(watcherSagaForComment),
   ]);
 }

@@ -63,7 +63,7 @@ export const CardGrid = ({
         ))}
         {issueYear}
       </Author>
-      <CardButton text={button} choice={GRID} list='' bookpage='' />
+      <CardButton text={button} choice={GRID} list='' bookpage='' onPress={() => {}} />
     </StyledCard>
   );
 };

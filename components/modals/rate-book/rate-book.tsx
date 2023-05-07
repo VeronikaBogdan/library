@@ -1,21 +1,39 @@
 import { useState } from 'react';
 import { Modal, Text, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
+import SyncStorage from 'sync-storage';
 
 import Cross from '../../../assets/svg/cross.svg';
 import { CardButton } from '../../button/card-button';
-import { Rating } from '../../stars/rating';
+
+import { commentRequest } from '../../../store/comments/actions';
+import { AppState } from '../../../store/rootReducer';
+import { CommentUserData } from '../../../store/comments/types';
 
 import { ORANGE } from '../../../styles/constant';
+import { RedHint, StyledView } from '../../../screens/registration-screen/styled-sregistration-screen';
 import { ModalTitle, StyledModalView } from '../styled-modal';
 import { RateText, RatingInput, TextInput } from './styled-rate-book';
-import { StyledView } from '../../../screens/registration-screen/styled-sregistration-screen';
 
-export const RateBookModal = ({ visible }: { visible: Function }) => {
+export const RateBookModal = ({
+  visible,
+  bookId,
+  visibleRefresh,
+}: {
+  visible: Function;
+  bookId: number;
+  visibleRefresh: Function;
+}) => {
+  const dispatch = useDispatch();
   const [isVisible, setVisibility] = useState(false);
 
   const handleVisible = () => {
     visible(isVisible);
+  };
+
+  const handleVisibleRefresh = () => {
+    visibleRefresh(true);
   };
 
   const {
@@ -27,19 +45,21 @@ export const RateBookModal = ({ visible }: { visible: Function }) => {
     criteriaMode: 'all',
     mode: 'all',
     defaultValues: {
-      id: ~~(Math.random() * (1000 - 1) + 1),
-      createdAt: new Date().toISOString(),
-      rating: null,
-      text: '',
-      //   user: {
-      // commetUserId:
-      //   }
+      rating: '',
+      text: '' || null,
+      book: bookId.toString(),
+      user: SyncStorage.get('userId').toString(),
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { pending } = useSelector((state: AppState) => state.comment);
+
+  const onSubmit = (commentData: CommentUserData) => {
+    dispatch(commentRequest({ data: commentData }));
+    console.log({ data: commentData });
+    console.log(pending);
     handleVisible();
+    handleVisibleRefresh();
     setVisibility(false);
   };
 
@@ -51,6 +71,7 @@ export const RateBookModal = ({ visible }: { visible: Function }) => {
             onPress={() => {
               handleVisible();
               setVisibility(false);
+              handleVisibleRefresh();
             }}
           >
             <Cross width={35} height={35} />
@@ -76,8 +97,7 @@ export const RateBookModal = ({ visible }: { visible: Function }) => {
             )}
             name='rating'
           />
-          {errors.rating && <Text>Это обязательное поле с допустимыми значениями от 1 до 5</Text>}
-          <Rating amount={Number(getValues('rating'))} choice='bookscreen' />
+          {errors.rating && <RedHint>Это обязательное поле с допустимыми значениями от 1 до 5</RedHint>}
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (

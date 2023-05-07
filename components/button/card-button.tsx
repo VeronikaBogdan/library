@@ -81,7 +81,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
       );
     if (list === 'list')
       return (
-        <IsTakendScreenButton activeOpacity={1}>
+        <IsTakendScreenButton activeOpacity={0}>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendScreenButton>
       );

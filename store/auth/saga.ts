@@ -6,7 +6,6 @@ import { HOST } from '../../app-constants';
 
 import { SIGNIN_REQUEST, signInSuccess, signInFailure } from './actions';
 import { SignInUserData } from './types';
-import { getData, storeData } from '../../utils/token';
 
 // export const getAllAuthUsers = () => axios.get(`${HOST}/auth.json`);
 
@@ -17,6 +16,7 @@ export const instance = axios.create({
 instance.interceptors.response.use(
   (res) => {
     SyncStorage.set('jwtToken', res.data.jwt);
+    SyncStorage.set('userId', res.data.user.id);
     return res;
   },
   (error) => {
