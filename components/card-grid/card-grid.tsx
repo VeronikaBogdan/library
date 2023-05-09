@@ -1,6 +1,7 @@
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import SyncStorage from 'sync-storage';
 
 import { GRID } from '../../app-constants';
 
@@ -12,6 +13,7 @@ import { Rating } from '../stars/rating';
 
 import { ACCENT } from '../../styles/constant';
 import { Author, HighlightTitle, StyledCard } from './styled-card-grid';
+import { Booking } from '../../store/books/types';
 
 type CardGridProps = {
   id: number;
@@ -22,7 +24,7 @@ type CardGridProps = {
   authors: string[] | null;
   issueYear: string | null;
   higlight: string;
-  button: string;
+  button: Booking;
   list: string;
 };
 
@@ -40,6 +42,17 @@ export const CardGrid = ({
 }: CardGridProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const buttonChoice = (booking: Booking | null) => {
+    if (booking === null)
+      return <CardButton text='Забронировать' list='' choice={GRID} bookpage='' onPress={() => {}} />;
+
+    if (booking.customerId === SyncStorage.get('userId'))
+      return <CardButton text='Забронирована' list='' choice={GRID} bookpage='' onPress={() => {}} />;
+
+    if (booking.customerId !== SyncStorage.get('userId'))
+      return <CardButton text='Забронирована' list='list' choice={GRID} bookpage='' onPress={() => {}} />;
+  };
 
   return (
     <StyledCard
@@ -63,7 +76,7 @@ export const CardGrid = ({
         ))}
         {issueYear}
       </Author>
-      <CardButton text={button} choice={GRID} list='' bookpage='' onPress={() => {}} />
+      {buttonChoice(button)}
     </StyledCard>
   );
 };

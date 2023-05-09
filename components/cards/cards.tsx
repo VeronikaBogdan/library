@@ -56,7 +56,7 @@ export const Cards = ({ viewChoice, sortChoice, searchTitle, category }: CardsPr
       title={item.title}
       authors={item.authors}
       issueYear={item.issueYear}
-      button='Забронировать'
+      button={item.booking}
       list=''
       higlight={searchTitle}
     />
@@ -71,7 +71,7 @@ export const Cards = ({ viewChoice, sortChoice, searchTitle, category }: CardsPr
       title={item.title}
       authors={item.authors}
       issueYear={item.issueYear}
-      button='Забронировать'
+      button={item.booking}
       list=''
       higlight={searchTitle}
     />

@@ -27,17 +27,17 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
           <StyledTextBook>{text}</StyledTextBook>
         </BookButton>
       );
-    if (text === 'Забронирована')
-      return (
-        <BookedButton>
-          <StyledTextBooked>{text}</StyledTextBooked>
-        </BookedButton>
-      );
     if (list === 'list')
       return (
         <IsTakendButton>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendButton>
+      );
+    if (text === 'Забронирована')
+      return (
+        <BookedButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedButton>
       );
   }
   if (choice === 'list') {
@@ -47,17 +47,17 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
           <StyledTextBook>{text}</StyledTextBook>
         </BookButton>
       );
-    if (text === 'Забронирована')
-      return (
-        <BookedButton>
-          <StyledTextBooked>{text}</StyledTextBooked>
-        </BookedButton>
-      );
     if (list === 'list')
       return (
         <IsTakendButton activeOpacity={1}>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendButton>
+      );
+    if (text === 'Забронирована')
+      return (
+        <BookedButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedButton>
       );
   }
   if (bookpage === 'bookpage') {
@@ -73,17 +73,17 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
           <StyledTextBook>{text}</StyledTextBook>
         </AssessScreenButton>
       );
-    if (text === 'Забронирована')
-      return (
-        <BookedScreenButton>
-          <StyledTextBooked>{text}</StyledTextBooked>
-        </BookedScreenButton>
-      );
     if (list === 'list')
       return (
         <IsTakendScreenButton activeOpacity={0}>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendScreenButton>
+      );
+    if (text === 'Забронирована')
+      return (
+        <BookedScreenButton>
+          <StyledTextBooked>{text}</StyledTextBooked>
+        </BookedScreenButton>
       );
   }
 

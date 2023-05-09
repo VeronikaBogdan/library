@@ -1,6 +1,7 @@
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import SyncStorage from 'sync-storage';
 
 import { LIST } from '../../app-constants';
 
@@ -12,6 +13,7 @@ import { Rating } from '../stars/rating';
 
 import { ACCENT } from '../../styles/constant';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
+import { Booking } from '../../store/books/types';
 
 type CardListProps = {
   id: number;
@@ -22,7 +24,7 @@ type CardListProps = {
   authors: string[] | null;
   issueYear: string | null;
   higlight: string;
-  button: string;
+  button: Booking;
   list: string;
 };
 
@@ -40,6 +42,17 @@ export const CardList = ({
 }: CardListProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const buttonChoice = (booking: Booking | null) => {
+    if (booking === null)
+      return <CardButton text='Забронировать' list='' choice={LIST} bookpage='' onPress={() => {}} />;
+
+    if (booking.customerId === SyncStorage.get('userId'))
+      return <CardButton text='Забронирована' list='' choice={LIST} bookpage='' onPress={() => {}} />;
+
+    if (booking.customerId !== SyncStorage.get('userId'))
+      return <CardButton text='Забронирована' list='list' choice={LIST} bookpage='' onPress={() => {}} />;
+  };
 
   return (
     <StyledCardList
@@ -64,7 +77,7 @@ export const CardList = ({
           {issueYear}
         </AuthorList>
         <Rating amount={rating} choice='' />
-        <CardButton text={button} choice={LIST} list='list' bookpage='' />
+        {buttonChoice(button)}
       </Wrapper>
     </StyledCardList>
   );
