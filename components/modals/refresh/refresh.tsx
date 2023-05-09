@@ -2,6 +2,7 @@ import { Modal } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { bookByIdRequest } from '../../../store/bookById/actions';
+import { booksRequest } from '../../../store/books/actions';
 import { AppState } from '../../../store/rootReducer';
 
 import { StyledModalView } from '../styled-modal';
@@ -18,6 +19,7 @@ export const RefreshModal = ({ visibleRefresh }: { visibleRefresh: Function }) =
   const handleVisibleRefresh = () => {
     visibleRefresh(false);
     dispatch(bookByIdRequest(bookById.id));
+    dispatch(booksRequest());
   };
 
   return (
@@ -28,7 +30,7 @@ export const RefreshModal = ({ visibleRefresh }: { visibleRefresh: Function }) =
             {status ? 'Спасибо, что нашли время оценить книгу!' : 'Оценка не была отправлена. Попробуйте позже!'}
           </MessageText>
           <AssessScreenButton onPress={() => (status ? handleVisibleRefresh() : visibleRefresh(false))}>
-            <StyledTextBook>{status ? 'обновить' : 'вернуться назад'}</StyledTextBook>
+            <StyledTextBook>{status ? 'нажмите для продолжения' : 'вернуться к книге'}</StyledTextBook>
           </AssessScreenButton>
         </StyledModalView>
       </CentralizedView>

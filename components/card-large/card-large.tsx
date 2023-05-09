@@ -12,7 +12,12 @@ import { AboutBookText, AboutBookTitle, AuthorLarge, Description, TitleLarge } f
 
 export const CardLarge = () => {
   const { bookById } = useSelector((state: AppState) => state.bookById);
-  const { id, title, authors, issueYear, description, images } = bookById;
+  const { id, title, authors, issueYear, description, images, booking } = bookById;
+  console.log('booking', booking === null);
+
+  const BookProps = { text: 'Забронировать', list: '', choice: '', bookpage: 'bookpage', onPress: () => {} };
+  const BookedProps = { text: 'Забронирована', list: '', choice: '', bookpage: 'bookpage', onPress: () => {} };
+  const IsTakenProps = { text: 'Занята до ', list: 'list', choice: '', bookpage: 'bookpage', onPress: () => {} };
 
   return (
     <View>
@@ -25,7 +30,7 @@ export const CardLarge = () => {
           ))}
           {issueYear}
         </AuthorLarge>
-        <CardButton text='Забронировать' list='' choice='' bookpage='bookpage' onPress={() => {}} />
+        <CardButton text='занята' list='list' choice='' bookpage='bookpage' onPress={() => {}} />
         <AboutBookTitle>О книге</AboutBookTitle>
         <AboutBookText>{description}</AboutBookText>
       </Description>

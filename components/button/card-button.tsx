@@ -67,7 +67,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
           <StyledTextBook>{text}</StyledTextBook>
         </BookScreenButton>
       );
-    if (text === 'Оценить книгу' || 'Оценить')
+    if (text === 'Оценить книгу' || text === 'Оценить')
       return (
         <AssessScreenButton onPress={onPress}>
           <StyledTextBook>{text}</StyledTextBook>

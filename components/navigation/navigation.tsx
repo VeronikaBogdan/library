@@ -104,7 +104,7 @@ export const Navigation = () => {
               drawerItemStyle: { height: 0 },
             }}
           />
-          <Drawer.Screen
+          {/* <Drawer.Screen
             name='TermsScreen'
             component={TermsScreen}
             options={{
@@ -119,7 +119,7 @@ export const Navigation = () => {
               drawerLabel: 'Оффер',
               title: 'Библиотека',
             }}
-          />
+          /> */}
           <Drawer.Screen
             name='exit'
             component={ExitScreen}

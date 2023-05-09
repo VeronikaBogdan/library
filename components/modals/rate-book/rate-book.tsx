@@ -71,7 +71,7 @@ export const RateBookModal = ({
             onPress={() => {
               handleVisible();
               setVisibility(false);
-              handleVisibleRefresh();
+              visibleRefresh(false);
             }}
           >
             <Cross width={35} height={35} />

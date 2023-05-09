@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import { CardLarge } from '../../components/card-large/card-large';
 import { Comments } from '../../components/comments/comments';
@@ -20,6 +21,7 @@ type BookScreenProps = { route: any };
 
 export const BookScreen = ({ route }: BookScreenProps) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { bookId, category } = route.params;
 
   const { bookById, pending, error } = useSelector((state: AppState) => state.bookById);
@@ -39,9 +41,11 @@ export const BookScreen = ({ route }: BookScreenProps) => {
       {isVisible && (
         <>
           <BreadCrumbsWrapper>
-            <BreadCrumbsText>
-              {categorySwitcher(category)} / {bookById.title}
-            </BreadCrumbsText>
+            <TouchableOpacity onPress={() => navigation.navigate(category)}>
+              <BreadCrumbsText>
+                {categorySwitcher(category)} / {bookById.title}
+              </BreadCrumbsText>
+            </TouchableOpacity>
           </BreadCrumbsWrapper>
           <ViewWrapper>
             <CardLarge />

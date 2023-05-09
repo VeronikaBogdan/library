@@ -68,7 +68,7 @@ export const RegistrationScreen = () => {
     if (!isMessage) toggleIsMessage(!isMessage);
   };
 
-  const { pending, error, statusError, status } = useSelector((state: AppState) => state.signUp);
+  const { statusError, status } = useSelector((state: AppState) => state.signUp);
 
   const registrationStep = (step: number) => {
     switch (step) {
@@ -250,7 +250,7 @@ export const RegistrationScreen = () => {
               )}
               name='email'
             />
-            {errors.email && <RedHint>Поле не может быть пустым</RedHint>}
+            {errors.email && <RedHint>Введите корректный e-mail</RedHint>}
             {isValid ? (
               <AssessScreenButton onPress={handleSubmit(onSubmit)}>
                 <StyledTextBook>Зарегистрироваться</StyledTextBook>

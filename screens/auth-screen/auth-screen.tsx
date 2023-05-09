@@ -50,7 +50,7 @@ export const AuthScreen = () => {
     reset();
   };
 
-  const { pending, error, statusError, token } = useSelector((state: AppState) => state.signIn);
+  const { pending, statusError, token } = useSelector((state: AppState) => state.signIn);
 
   useEffect(() => {
     if (token && SyncStorage.get('jwtToken')) {
@@ -80,12 +80,6 @@ export const AuthScreen = () => {
               control={control}
               rules={{
                 required: true,
-                validate: {
-                  hasLatinLettersAndNumbers: (username) =>
-                    /[A-z0-9]+/.test(username) || 'Используйте для логина латинский алфавит и цифры',
-                  hasNumbers: (username) => /[0-9]+/g.test(username) || 'цифры',
-                  hasLatinLetters: (username) => /[A-z]+/g.test(username) || 'латинский алфавит',
-                },
               }}
               render={({ field: { onChange, onBlur } }) => (
                 <CommonInput
@@ -103,11 +97,6 @@ export const AuthScreen = () => {
               control={control}
               rules={{
                 required: true,
-                validate: {
-                  hasCapitalLetter: (password) => /[A-Z]+/.test(password) || 'заглавной буквой',
-                  hasDigits: (password) => /[0-9]+/.test(password) || 'цифрой',
-                  hasGreaterThanOrEqualEightCharacters: (password) => password.length >= 8 || 'не менее 8 символов',
-                },
               }}
               render={({ field: { onChange, onBlur } }) => (
                 <CommonInput

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SyncStorage from 'sync-storage';
 
 import Down from '../../assets/svg/down.svg';
 import Up from '../../assets/svg/up.svg';
 
-import { bookByIdRequest } from '../../store/bookById/actions';
 import { AppState } from '../../store/rootReducer';
 
 import { SectionTitle } from '../../screens/book-screen/styled-book-screen';
@@ -31,7 +30,6 @@ import { ORANGE } from '../../styles/constant';
 import { IsTakendScreenButton, StyledTextIsTaken } from '../button/styled-card-button';
 
 export const Comments = () => {
-  const dispatch = useDispatch();
   const { bookById, pending } = useSelector((state: AppState) => state.bookById);
   const [isOpen, setOpen] = useState(true);
   const [isVisible, setVisible] = useState(false);
@@ -75,7 +73,7 @@ export const Comments = () => {
             <CommentText>{comment.text}</CommentText>
           </Comment>
         ))}
-      {bookById.comments.some((item) => item.user.commentUserId === SyncStorage.get('userId')) ? (
+      {bookById.comments && bookById.comments.some((item) => item.user.commentUserId === SyncStorage.get('userId')) ? (
         <IsTakendScreenButton>
           <StyledTextIsTaken>Вы уже оставили отзыв</StyledTextIsTaken>
         </IsTakendScreenButton>
