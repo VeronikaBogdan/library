@@ -29,7 +29,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
       );
     if (list === 'list')
       return (
-        <IsTakendButton>
+        <IsTakendButton activeOpacity={1}>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendButton>
       );
@@ -75,7 +75,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
       );
     if (list === 'list')
       return (
-        <IsTakendScreenButton activeOpacity={0}>
+        <IsTakendScreenButton activeOpacity={1}>
           <StyledTextIsTaken>{text}</StyledTextIsTaken>
         </IsTakendScreenButton>
       );

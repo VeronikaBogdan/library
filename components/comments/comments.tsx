@@ -74,7 +74,7 @@ export const Comments = () => {
           </Comment>
         ))}
       {bookById.comments && bookById.comments.some((item) => item.user.commentUserId === SyncStorage.get('userId')) ? (
-        <IsTakendScreenButton>
+        <IsTakendScreenButton activeOpacity={1}>
           <StyledTextIsTaken>Вы уже оставили отзыв</StyledTextIsTaken>
         </IsTakendScreenButton>
       ) : (

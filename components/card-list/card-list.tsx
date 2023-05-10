@@ -13,12 +13,12 @@ import { Rating } from '../stars/rating';
 
 import { ACCENT } from '../../styles/constant';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
-import { Booking } from '../../store/books/types';
+import { Booking, Image } from '../../store/books/types';
 
 type CardListProps = {
   id: number;
   category: string;
-  image: string;
+  image: Image;
   rating: number | null;
   title: string;
   authors: string[] | null;

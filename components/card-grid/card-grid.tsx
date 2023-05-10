@@ -13,12 +13,12 @@ import { Rating } from '../stars/rating';
 
 import { ACCENT } from '../../styles/constant';
 import { Author, HighlightTitle, StyledCard } from './styled-card-grid';
-import { Booking } from '../../store/books/types';
+import { Booking, Image } from '../../store/books/types';
 
 type CardGridProps = {
   id: number;
   category: string;
-  image: string;
+  image: Image;
   rating: number | null;
   title: string;
   authors: string[] | null;
