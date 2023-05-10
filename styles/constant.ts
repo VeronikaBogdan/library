@@ -1,0 +1,16 @@
+export const BLACK = '#000';
+export const ACCENT = 'rgb(244, 44, 79)';
+export const WHITE = '#fff';
+export const DARK = '#363636';
+export const DARK30 = 'rgba(54, 54, 54, 0.3)';
+export const WARNING = '#FFBC1F';
+export const POSITIVE = '#00CA71';
+export const BGPOSITIVE = '#EBF9F1';
+export const NEGATIVE = '#F42C4F';
+export const BGNEGATIVE = '#FEEBEA';
+export const BLACK70 = '#727272';
+export const BLACK40 = '#A7A7A7';
+export const BLACK20 = '#BFC4C9';
+export const BLACK10 = '#EBEBEB';
+export const BLACK5 = '#F9F9FA';
+export const ORANGE = 'rgb(248, 54, 0)';
