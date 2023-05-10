@@ -6,6 +6,7 @@ import bookByIdReducer from './bookById/reducer';
 import signUpReducer from './registration/reducer';
 import signInReducer from './auth/reducer';
 import commentReducer from './comments/reducer';
+import bookingReducer from './booking/reducer';
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   signUp: signUpReducer,
   signIn: signInReducer,
   comment: commentReducer,
+  booking: bookingReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

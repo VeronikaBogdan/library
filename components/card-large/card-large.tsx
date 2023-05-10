@@ -33,7 +33,7 @@ export const CardLarge = () => {
 
   return (
     <View>
-      <BookImage image={images[0].url} choice={BOOKPAGE} bookpage={id} />
+      <BookImage image={images[0]} choice={BOOKPAGE} bookpage={id} />
       <Description>
         <TitleLarge>{title}</TitleLarge>
         <AuthorLarge>

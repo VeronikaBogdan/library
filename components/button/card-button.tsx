@@ -23,7 +23,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
   if (choice === 'grid') {
     if (text === 'Забронировать')
       return (
-        <BookButton>
+        <BookButton onPress={onPress}>
           <StyledTextBook>{text}</StyledTextBook>
         </BookButton>
       );
@@ -43,7 +43,7 @@ export const CardButton = ({ text, list, choice, bookpage, onPress }: CardButton
   if (choice === 'list') {
     if (text === 'Забронировать')
       return (
-        <BookButton>
+        <BookButton onPress={onPress}>
           <StyledTextBook>{text}</StyledTextBook>
         </BookButton>
       );

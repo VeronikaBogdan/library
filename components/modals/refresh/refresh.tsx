@@ -10,11 +10,13 @@ import { CentralizedView } from './styled-refresh';
 import { MessageText } from '../auth-message/styled-auth-message';
 import { AssessScreenButton, StyledTextBook } from '../../button/styled-card-button';
 
-export const RefreshModal = ({ visibleRefresh }: { visibleRefresh: Function }) => {
+export const RefreshModal = ({ visibleRefresh, choice }: { visibleRefresh: Function; choice: string }) => {
   const dispatch = useDispatch();
   const { bookById } = useSelector((state: AppState) => state.bookById);
   const { comment } = useSelector((state: AppState) => state.comment);
-  const status = Object.entries(comment).length > 0;
+  const { booking } = useSelector((state: AppState) => state.booking);
+  const statusComment = Object.entries(comment).length > 0;
+  const statusBooking = Object.entries(booking).length > 0;
 
   const handleVisibleRefresh = () => {
     visibleRefresh(false);
@@ -24,16 +26,31 @@ export const RefreshModal = ({ visibleRefresh }: { visibleRefresh: Function }) =
 
   return (
     <Modal animationType='fade'>
-      <CentralizedView status={status}>
-        <StyledModalView>
-          <MessageText>
-            {status ? 'Спасибо, что нашли время оценить книгу!' : 'Оценка не была отправлена. Попробуйте позже!'}
-          </MessageText>
-          <AssessScreenButton onPress={() => (status ? handleVisibleRefresh() : visibleRefresh(false))}>
-            <StyledTextBook>{status ? 'нажмите для продолжения' : 'вернуться к книге'}</StyledTextBook>
-          </AssessScreenButton>
-        </StyledModalView>
-      </CentralizedView>
+      {choice === 'booking' ? (
+        <CentralizedView status={statusBooking}>
+          <StyledModalView>
+            <MessageText>
+              {statusBooking ? 'Выбранная книга забронирована!' : 'Бронирование не было отправлено. Попробуйте позже!'}
+            </MessageText>
+            <AssessScreenButton onPress={() => (statusBooking ? handleVisibleRefresh() : visibleRefresh(false))}>
+              <StyledTextBook>{statusBooking ? 'нажмите для продолжения' : 'вернуться назад'}</StyledTextBook>
+            </AssessScreenButton>
+          </StyledModalView>
+        </CentralizedView>
+      ) : (
+        <CentralizedView status={statusComment}>
+          <StyledModalView>
+            <MessageText>
+              {statusComment
+                ? 'Спасибо, что нашли время оценить книгу!'
+                : 'Оценка не была отправлена. Попробуйте позже!'}
+            </MessageText>
+            <AssessScreenButton onPress={() => (statusComment ? handleVisibleRefresh() : visibleRefresh(false))}>
+              <StyledTextBook>{statusComment ? 'нажмите для продолжения' : 'вернуться к книге'}</StyledTextBook>
+            </AssessScreenButton>
+          </StyledModalView>
+        </CentralizedView>
+      )}
     </Modal>
   );
 };

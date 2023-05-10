@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import * as styles from '../../styles/constant';
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity.attrs(({ onPress }) => ({ onPress: onPress }))`
   align-items: center;
   justify-content: center;
   background: ${styles.ORANGE};

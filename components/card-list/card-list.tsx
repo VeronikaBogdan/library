@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +11,8 @@ import { bookByIdRequest } from '../../store/bookById/actions';
 import { BookImage } from '../book-image/book-image';
 import { CardButton } from '../button/card-button';
 import { Rating } from '../stars/rating';
+import { BookingModal } from '../modals/booking/booking';
+import { RefreshModal } from '../modals/refresh/refresh';
 
 import { ACCENT } from '../../styles/constant';
 import { AuthorList, TitleList, StyledCardList, Wrapper } from './styled-card-list';
@@ -42,10 +45,30 @@ export const CardList = ({
 }: CardListProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [isVisible, setVisible] = useState(false);
+  const [isVisibleModalBooking, setVisibleModalBooking] = useState(false);
+
+  const handleChangeModal = (isVisible: boolean) => {
+    setVisible(isVisible);
+  };
+
+  const handleChangeModalBooking = (isVisible: boolean) => {
+    setVisibleModalBooking(isVisible);
+  };
 
   const buttonChoice = (booking: Booking | null) => {
     if (booking === null)
-      return <CardButton text='Забронировать' list='' choice={LIST} bookpage='' onPress={() => {}} />;
+      return (
+        <CardButton
+          text='Забронировать'
+          list=''
+          choice={LIST}
+          bookpage=''
+          onPress={() => {
+            setVisible(true);
+          }}
+        />
+      );
 
     if (booking.customerId === SyncStorage.get('userId'))
       return <CardButton text='Забронирована' list='' choice={LIST} bookpage='' onPress={() => {}} />;
@@ -79,6 +102,8 @@ export const CardList = ({
         <Rating amount={rating} choice='' />
         {buttonChoice(button)}
       </Wrapper>
+      {isVisible && <BookingModal visible={handleChangeModal} bookId={id} visibleBooking={handleChangeModalBooking} />}
+      {isVisibleModalBooking && <RefreshModal visibleRefresh={handleChangeModalBooking} choice='booking' />}
     </StyledCardList>
   );
 };
